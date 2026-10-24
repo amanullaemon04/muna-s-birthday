@@ -57,7 +57,7 @@
 
     /* ---------------- SCENE 1: BOW & HEART ---------------- */
     #scene1 {
-      background: radial-gradient(circle at 50% 30%, #f7d6e4 0%, #f5ece6 55%, #efe5dc 100%);
+      background: radial-gradient(circle at 50% 28%, #f7d6e4 0%, #f5ece6 55%, #efe5dc 100%);
       z-index: 10;
     }
 
@@ -75,11 +75,11 @@
 
     #heart-target {
       position: absolute;
-      top: 19%;
+      top: 20%;
       left: 50%;
       transform: translateX(-50%);
-      width: 125px;
-      height: 125px;
+      width: 130px;
+      height: 130px;
       filter: drop-shadow(0 16px 24px rgba(216, 43, 119, 0.35));
       animation: floatHeart 2.8s ease-in-out infinite;
       z-index: 2;
@@ -300,7 +300,6 @@
       opacity: 1;
     }
 
-    /* Floating Background Particles */
     .particles-bg {
       position: fixed;
       inset: 0;
@@ -323,7 +322,6 @@
       100% { transform: translateY(-10vh) rotate(360deg); opacity: 0; }
     }
 
-    /* Hero Section */
     .hero {
       position: relative;
       min-height: 100vh;
@@ -404,7 +402,6 @@
       100% { transform: translateY(14px); opacity: 0; }
     }
 
-    /* Photo Gallery Section */
     .gallery-section {
       position: relative;
       z-index: 2;
@@ -495,7 +492,6 @@
       transform: scale(1.15);
     }
 
-    /* Special Message Section */
     .message-section {
       position: relative;
       z-index: 2;
@@ -589,17 +585,18 @@
         <ellipse cx="62" cy="52" rx="18" ry="10" transform="rotate(-30 62 52)" fill="rgba(255,255,255,0.45)" filter="url(#blurHighlight)" />
       </svg>
 
+      <!-- Interactive Bow & Arrow SVG -->
       <svg id="bow-svg">
         <g id="bow-group">
-          <polyline id="bow-string" points="0,-65 0,0 0,65" fill="none" stroke="#8c6d62" stroke-width="2" />
-          <path d="M 0,-65 C 34,-30 34,30 0,65" fill="none" stroke="#4a2511" stroke-width="4.5" stroke-linecap="round" />
+          <polyline id="bow-string" points="0,-68 0,0 0,68" fill="none" stroke="#8c6d62" stroke-width="2.2" />
+          <path d="M 0,-68 C 36,-32 36,32 0,68" fill="none" stroke="#4a2511" stroke-width="5" stroke-linecap="round" />
         </g>
 
         <g id="arrow-group">
-          <line x1="-55" y1="0" x2="30" y2="0" stroke="#5c3828" stroke-width="3" />
-          <path d="M -45,0 L -57,-8 L -47,-8 L -35,0 Z" fill="#e82578" />
-          <path d="M -45,0 L -57,8 L -47,8 L -35,0 Z" fill="#ff7aa8" />
-          <path d="M 40,0 L 26,-8 C 22,-10 20,-4 26,0 C 20,4 22,10 26,8 Z" fill="#d91b6b" />
+          <line x1="-58" y1="0" x2="32" y2="0" stroke="#5c3828" stroke-width="3.2" />
+          <path d="M -46,0 L -58,-9 L -48,-9 L -36,0 Z" fill="#e82578" />
+          <path d="M -46,0 L -58,9 L -48,9 L -36,0 Z" fill="#ff7aa8" />
+          <path d="M 42,0 L 28,-8 C 24,-10 22,-4 28,0 C 22,4 24,10 28,8 Z" fill="#d91b6b" />
         </g>
       </svg>
 
@@ -633,9 +630,8 @@
     </div>
   </div>
 
-  <!-- ================= SCENE 4: CELEBRATION PAGE (HERO + GALLERY + MESSAGE) ================= -->
+  <!-- ================= SCENE 4: CELEBRATION PAGE ================= -->
   <div id="celebration-page">
-    <!-- Floating Background Hearts & Butterflies -->
     <div class="particles-bg" id="particles-bg"></div>
 
     <!-- Hero Section -->
@@ -660,5 +656,65 @@
       </div>
     </section>
 
-    <!-- Photo Gallery Section (Ekhaner img src পরিবর্তন kore nijer chobi dite paro) -->
-    <section class="
+    <!-- Photo Gallery Section -->
+    <section class="gallery-section" id="gallery">
+      <h2 class="section-title">Our Beautiful Memories</h2>
+
+      <div class="gallery-grid">
+        <!-- Photo 1 -->
+        <div class="photo-card">
+          <div class="photo-container">
+            <img src="https://images.unsplash.com/photo-1518199266791-5375a83190b7?auto=format&fit=crop&w=800&q=80" alt="Beautiful moment">
+            <div class="photo-overlay">
+              <div class="photo-caption">Every moment with you is magical ✨</div>
+              <button class="like-btn" onclick="toggleLike(this)">
+                <span class="heart-icon">🤍</span>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Photo 2 -->
+        <div class="photo-card">
+          <div class="photo-container">
+            <img src="https://images.unsplash.com/photo-1516589178581-6cd7833ae3b2?auto=format&fit=crop&w=800&q=80" alt="Sweet memory">
+            <div class="photo-overlay">
+              <div class="photo-caption">Your smile lights up my world 💫</div>
+              <button class="like-btn" onclick="toggleLike(this)">
+                <span class="heart-icon">🤍</span>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Photo 3 -->
+        <div class="photo-card">
+          <div class="photo-container">
+            <img src="https://images.unsplash.com/photo-1522673607200-164d1b6ce486?auto=format&fit=crop&w=800&q=80" alt="Happy times">
+            <div class="photo-overlay">
+              <div class="photo-caption">Adventures together 🌟</div>
+              <button class="like-btn" onclick="toggleLike(this)">
+                <span class="heart-icon">🤍</span>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Photo 4 -->
+        <div class="photo-card">
+          <div class="photo-container">
+            <img src="https://images.unsplash.com/photo-1494774157365-9e04c6720e47?auto=format&fit=crop&w=800&q=80" alt="Love moment">
+            <div class="photo-overlay">
+              <div class="photo-caption">My heart belongs to you 💕</div>
+              <button class="like-btn" onclick="toggleLike(this)">
+                <span class="heart-icon">🤍</span>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Photo 5 -->
+        <div class="photo-card">
+          <div class="photo-container">
+            <img src="https://images.unsplash.com/photo-1529333166437-7750a6dd5a70?auto=format&fit=crop&w=800&q=80" alt="Beautiful day">
+        
