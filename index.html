@@ -2,8 +2,8 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>A Little Something, For You</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <title>Happy Birthday ✨</title>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,400&family=Great+Vibes&family=Playfair+Display:ital,wght@0,700;1,400&display=swap" rel="stylesheet">
   
   <style>
@@ -13,27 +13,39 @@
       box-sizing: border-box;
       user-select: none;
       -webkit-user-select: none;
+      -webkit-touch-callout: none;
     }
 
-    body, html {
+    html, body {
+      position: fixed;
+      inset: 0;
       width: 100%;
       height: 100%;
       overflow: hidden;
+      overscroll-behavior: none;
+      touch-action: none;
       background-color: #f7efe8;
       font-family: 'Cormorant Garamond', serif;
     }
 
+    #app {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+    }
+
     .screen {
       position: absolute;
-      top: 0;
-      left: 0;
+      inset: 0;
       width: 100%;
       height: 100%;
       display: flex;
       flex-direction: column;
       justify-content: center;
       align-items: center;
-      transition: opacity 0.8s ease;
+      overflow: hidden;
+      transition: opacity 0.7s ease;
     }
 
     .hidden {
@@ -41,130 +53,135 @@
       pointer-events: none;
     }
 
-    /* ---------------- SCENE 1: BOW & HEART ---------------- */
+    /* ---------------- SCENE 1: BOW & HEART (MOBILE PORTRAIT) ---------------- */
     #scene1 {
-      background: radial-gradient(circle at 60% 40%, #f5d7e3 0%, #f5ece6 50%, #efe6dd 100%);
+      background: radial-gradient(circle at 50% 30%, #f7d6e4 0%, #f5ece6 55%, #efe5dc 100%);
+      z-index: 10;
     }
 
     .top-sub {
       position: absolute;
-      top: 18%;
-      left: 55%;
+      top: 12%;
+      left: 50%;
       transform: translateX(-50%);
       font-style: italic;
       font-size: 1.35rem;
       color: #6d4c5b;
       white-space: nowrap;
+      z-index: 2;
     }
 
     #heart-target {
       position: absolute;
-      top: 25%;
-      left: 55%;
-      transform: translate(-50%, 0);
-      width: 140px;
-      height: 140px;
-      filter: drop-shadow(0 20px 30px rgba(216, 43, 119, 0.35));
-      animation: floatHeart 3s ease-in-out infinite;
+      top: 19%;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 125px;
+      height: 125px;
+      filter: drop-shadow(0 16px 24px rgba(216, 43, 119, 0.35));
+      animation: floatHeart 2.8s ease-in-out infinite;
+      z-index: 2;
     }
 
     @keyframes floatHeart {
       0%, 100% { transform: translate(-50%, 0px) scale(1); }
-      50% { transform: translate(-50%, -12px) scale(1.04); }
-    }
-
-    .instruction {
-      position: absolute;
-      bottom: 10%;
-      font-size: 0.85rem;
-      letter-spacing: 3px;
-      color: #7c6870;
-      text-transform: uppercase;
+      50% { transform: translate(-50%, -10px) scale(1.04); }
     }
 
     #bow-svg {
       position: absolute;
-      top: 0;
-      left: 0;
+      inset: 0;
       width: 100%;
       height: 100%;
-      cursor: grab;
+      z-index: 5;
       touch-action: none;
     }
 
-    #pink-burst {
+    .instruction {
       position: absolute;
-      width: 20px;
-      height: 20px;
+      bottom: 8%;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 0.8rem;
+      letter-spacing: 3px;
+      color: #7c6870;
+      text-transform: uppercase;
+      white-space: nowrap;
+      z-index: 2;
+    }
+
+    /* Clip-Path Burst (Zero Overflow!) */
+    #pink-wipe {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
       background-color: #c90f64;
-      border-radius: 50%;
-      top: 35%;
-      left: 55%;
-      transform: translate(-50%, -50%) scale(0);
+      clip-path: circle(0% at 50% 28%);
       pointer-events: none;
-      z-index: 20;
-      transition: transform 0.9s cubic-bezier(0.65, 0, 0.35, 1);
+      z-index: 15;
+      transition: clip-path 0.85s cubic-bezier(0.65, 0, 0.35, 1);
     }
 
     /* ---------------- SCENE 2: PINK BANNER ---------------- */
     #scene2 {
       background-color: #f5ece6;
-      z-index: 25;
+      z-index: 20;
     }
 
     .banner-bar {
       width: 100%;
-      height: 58%;
+      height: 52%;
       background-color: #c90f64;
       display: flex;
       flex-direction: column;
       justify-content: center;
       align-items: center;
       color: #fff;
-      position: relative;
-      box-shadow: 0 10px 40px rgba(201, 15, 100, 0.25);
+      padding: 0 20px;
+      box-shadow: 0 12px 35px rgba(201, 15, 100, 0.25);
     }
 
     .wish-text {
       font-style: italic;
-      font-size: 1.4rem;
+      font-size: 1.35rem;
       color: #f7d4e3;
-      margin-bottom: 10px;
+      margin-bottom: 8px;
       opacity: 0;
-      transform: translateY(15px);
-      transition: all 0.8s ease 0.3s;
+      transform: translateY(12px);
+      transition: all 0.7s ease 0.2s;
     }
 
     .hb-main {
       font-family: 'Playfair Display', serif;
-      font-size: 5rem;
-      line-height: 0.95;
+      font-size: 3.8rem;
+      line-height: 0.96;
       text-align: center;
-      letter-spacing: -1px;
+      letter-spacing: -0.5px;
       opacity: 0;
       transform: scale(0.92);
-      transition: all 0.8s ease 0.6s;
+      transition: all 0.7s ease 0.5s;
     }
 
     .gold-swish {
-      width: 220px;
-      height: 30px;
+      width: 200px;
+      height: 28px;
       margin-top: 8px;
     }
 
     .gold-swish path {
       stroke-dasharray: 500;
       stroke-dashoffset: 500;
-      transition: stroke-dashoffset 1.2s ease 1.1s;
+      transition: stroke-dashoffset 1.1s ease 0.9s;
     }
 
     .sub-worth {
       font-style: italic;
-      font-size: 1.25rem;
+      font-size: 1.2rem;
       color: #f7d4e3;
       margin-top: 6px;
       opacity: 0;
-      transition: opacity 0.8s ease 1.4s;
+      transition: opacity 0.7s ease 1.2s;
     }
 
     #scene2.active .wish-text { opacity: 1; transform: translateY(0); }
@@ -172,147 +189,145 @@
     #scene2.active .gold-swish path { stroke-dashoffset: 0; }
     #scene2.active .sub-worth { opacity: 1; }
 
-    /* ---------------- SCENE 3: HEART TREE ---------------- */
+    /* ---------------- SCENE 3: HEART TREE (MOBILE FIT) ---------------- */
     #scene3 {
-      background: radial-gradient(circle at 65% 45%, #f7e2ec 0%, #f3eae2 60%, #ebe0d6 100%);
+      background: radial-gradient(circle at 50% 38%, #f9e2ec 0%, #f4ebe2 60%, #ebe0d5 100%);
       z-index: 30;
     }
 
     #tree-canvas {
       position: absolute;
-      top: 0;
-      left: 0;
+      inset: 0;
       width: 100%;
       height: 100%;
+      display: block;
     }
 
-    .left-message {
+    .bottom-card {
       position: absolute;
-      left: 8%;
-      bottom: 14%;
+      bottom: 6%;
+      left: 50%;
+      transform: translate(-50%, 20px);
+      width: 88%;
+      max-width: 360px;
+      text-align: center;
+      background: rgba(248, 241, 235, 0.88);
+      backdrop-filter: blur(6px);
+      -webkit-backdrop-filter: blur(6px);
+      padding: 14px 20px;
+      border-radius: 16px;
+      box-shadow: 0 8px 25px rgba(140, 59, 90, 0.1);
       z-index: 35;
       opacity: 0;
-      transform: translateY(20px);
-      transition: all 1s ease;
-      background: rgba(247, 239, 232, 0.65);
-      backdrop-filter: blur(3px);
-      padding: 10px 18px;
-      border-radius: 12px;
+      transition: all 0.9s ease;
     }
 
-    .left-message.show {
+    .bottom-card.show {
       opacity: 1;
-      transform: translateY(0);
+      transform: translate(-50%, 0);
     }
 
-    .left-message .count-text {
+    .bottom-card .count-text {
       font-style: italic;
-      font-size: 1.4rem;
+      font-size: 1.25rem;
       color: #8c3b5a;
-      margin-bottom: -4px;
     }
 
-    .left-message .script-hb {
+    .bottom-card .script-hb {
       font-family: 'Great Vibes', cursive;
-      font-size: 4.8rem;
+      font-size: 3.3rem;
       color: #c90f64;
       padding: 4px 0;
-      border-top: 1px solid rgba(201, 15, 100, 0.3);
-      border-bottom: 1px solid rgba(201, 15, 100, 0.3);
+      border-top: 1px solid rgba(201, 15, 100, 0.25);
+      border-bottom: 1px solid rgba(201, 15, 100, 0.25);
       margin: 6px 0;
       white-space: nowrap;
     }
 
-    .left-message .bloom-sub {
+    .bottom-card .bloom-sub {
       font-style: italic;
-      font-size: 1.2rem;
+      font-size: 1.15rem;
       color: #6d4c5b;
-    }
-
-    @media (max-width: 768px) {
-      .hb-main { font-size: 3.5rem; }
-      .left-message {
-        left: 5%;
-        bottom: 6%;
-        padding: 8px 14px;
-      }
-      .left-message .count-text { font-size: 1.2rem; }
-      .left-message .script-hb { font-size: 3.1rem; }
-      .left-message .bloom-sub { font-size: 1.05rem; }
-      #heart-target { width: 115px; height: 115px; }
     }
   </style>
 </head>
 <body>
 
-  <!-- SCENE 1: Bow and Arrow -->
-  <div id="scene1" class="screen">
-    <div class="top-sub">a little something, for you</div>
+  <div id="app">
+    <!-- SCENE 1: Bow and Arrow -->
+    <div id="scene1" class="screen">
+      <div class="top-sub">a little something, for you</div>
 
-    <svg id="heart-target" viewBox="0 0 200 200">
-      <defs>
-        <radialGradient id="glossyHeart" cx="35%" cy="30%" r="65%">
-          <stop offset="0%" stop-color="#ff99c8" />
-          <stop offset="35%" stop-color="#e82578" />
-          <stop offset="80%" stop-color="#a8064d" />
-          <stop offset="100%" stop-color="#700232" />
-        </radialGradient>
-        <filter id="blurHighlight">
-          <feGaussianBlur stdDeviation="4" />
-        </filter>
-      </defs>
-      <path d="M100,175 C100,175 20,120 20,65 C20,30 50,15 75,15 C90,15 100,28 100,28 C100,28 110,15 125,15 C150,15 180,30 180,65 C180,120 100,175 100,175 Z" fill="url(#glossyHeart)" />
-      <ellipse cx="62" cy="52" rx="18" ry="10" transform="rotate(-30 62 52)" fill="rgba(255,255,255,0.45)" filter="url(#blurHighlight)" />
-    </svg>
-
-    <svg id="bow-svg">
-      <g id="bow-group">
-        <polyline id="bow-string" points="0,-70 0,0 0,70" fill="none" stroke="#8c6d62" stroke-width="1.8" />
-        <path d="M 0,-70 C 35,-32 35,32 0,70" fill="none" stroke="#4a2511" stroke-width="4.5" stroke-linecap="round" />
-      </g>
-
-      <g id="arrow-group">
-        <line x1="-60" y1="0" x2="32" y2="0" stroke="#5c3828" stroke-width="3" />
-        <path d="M -50,0 L -62,-8 L -52,-8 L -40,0 Z" fill="#e82578" />
-        <path d="M -50,0 L -62,8 L -52,8 L -40,0 Z" fill="#ff7aa8" />
-        <path d="M 42,0 L 28,-8 C 24,-10 22,-4 28,0 C 22,4 24,10 28,8 Z" fill="#d91b6b" />
-      </g>
-    </svg>
-
-    <div class="instruction">PULL &amp; RELEASE</div>
-    <div id="pink-burst"></div>
-  </div>
-
-  <!-- SCENE 2: Pink Birthday Banner -->
-  <div id="scene2" class="screen hidden">
-    <div class="banner-bar">
-      <div class="wish-text">make a wish...</div>
-      <div class="hb-main">Happy<br>Birthday</div>
-      <svg class="gold-swish" viewBox="0 0 300 40">
-        <path d="M 20,25 Q 150,5 280,20 Q 170,38 70,28" fill="none" stroke="#d4af37" stroke-width="2.5" stroke-linecap="round"/>
+      <svg id="heart-target" viewBox="0 0 200 200">
+        <defs>
+          <radialGradient id="glossyHeart" cx="35%" cy="30%" r="65%">
+            <stop offset="0%" stop-color="#ff99c8" />
+            <stop offset="35%" stop-color="#e82578" />
+            <stop offset="80%" stop-color="#a8064d" />
+            <stop offset="100%" stop-color="#700232" />
+          </radialGradient>
+          <filter id="blurHighlight">
+            <feGaussianBlur stdDeviation="4" />
+          </filter>
+        </defs>
+        <path d="M100,175 C100,175 20,120 20,65 C20,30 50,15 75,15 C90,15 100,28 100,28 C100,28 110,15 125,15 C150,15 180,30 180,65 C180,120 100,175 100,175 Z" fill="url(#glossyHeart)" />
+        <ellipse cx="62" cy="52" rx="18" ry="10" transform="rotate(-30 62 52)" fill="rgba(255,255,255,0.45)" filter="url(#blurHighlight)" />
       </svg>
-      <div class="sub-worth">to someone worth celebrating</div>
-    </div>
-  </div>
 
-  <!-- SCENE 3: Growing Tree & Heart Leaves -->
-  <div id="scene3" class="screen hidden">
-    <canvas id="tree-canvas"></canvas>
-    <div class="left-message" id="final-text">
-      <div class="count-text">and... make it count</div>
-      <div class="script-hb">Happy Birthday</div>
-      <div class="bloom-sub">Here's to a year that blooms</div>
+      <svg id="bow-svg">
+        <g id="bow-group">
+          <polyline id="bow-string" points="0,-65 0,0 0,65" fill="none" stroke="#8c6d62" stroke-width="2" />
+          <path d="M 0,-65 C 34,-30 34,30 0,65" fill="none" stroke="#4a2511" stroke-width="4.5" stroke-linecap="round" />
+        </g>
+
+        <g id="arrow-group">
+          <line x1="-55" y1="0" x2="30" y2="0" stroke="#5c3828" stroke-width="3" />
+          <path d="M -45,0 L -57,-8 L -47,-8 L -35,0 Z" fill="#e82578" />
+          <path d="M -45,0 L -57,8 L -47,8 L -35,0 Z" fill="#ff7aa8" />
+          <path d="M 40,0 L 26,-8 C 22,-10 20,-4 26,0 C 20,4 22,10 26,8 Z" fill="#d91b6b" />
+        </g>
+      </svg>
+
+      <div class="instruction">PULL &amp; RELEASE</div>
+      <div id="pink-wipe"></div>
+    </div>
+
+    <!-- SCENE 2: Pink Birthday Banner -->
+    <div id="scene2" class="screen hidden">
+      <div class="banner-bar">
+        <div class="wish-text">make a wish...</div>
+        <div class="hb-main">Happy<br>Birthday</div>
+        <svg class="gold-swish" viewBox="0 0 300 40">
+          <path d="M 20,25 Q 150,5 280,20 Q 170,38 70,28" fill="none" stroke="#d4af37" stroke-width="2.8" stroke-linecap="round"/>
+        </svg>
+        <div class="sub-worth">to someone worth celebrating</div>
+      </div>
+    </div>
+
+    <!-- SCENE 3: Growing Heart Tree -->
+    <div id="scene3" class="screen hidden">
+      <canvas id="tree-canvas"></canvas>
+      <div class="bottom-card" id="final-text">
+        <div class="count-text">and... make it count</div>
+        <div class="script-hb">Happy Birthday</div>
+        <div class="bloom-sub">Here's to a year that blooms</div>
+      </div>
     </div>
   </div>
 
   <script>
+    // Prevent default touch scrolling everywhere
+    document.addEventListener('touchmove', function(e) {
+      e.preventDefault();
+    }, { passive: false });
+
     /* ================= SCENE 1 LOGIC ================= */
     const bowSvg = document.getElementById('bow-svg');
     const bowGroup = document.getElementById('bow-group');
     const bowString = document.getElementById('bow-string');
     const arrowGroup = document.getElementById('arrow-group');
     const heartTarget = document.getElementById('heart-target');
-    const pinkBurst = document.getElementById('pink-burst');
+    const pinkWipe = document.getElementById('pink-wipe');
 
     let bowX, bowY, targetX, targetY, bowAngle;
     let isDragging = false;
@@ -320,11 +335,15 @@
     let arrowLaunched = false;
 
     function updatePositions() {
-      bowX = window.innerWidth * 0.28;
-      bowY = window.innerHeight * 0.68;
+      const w = window.innerWidth;
+      const h = window.innerHeight;
+      bowX = w * 0.5;
+      bowY = h * 0.72;
+
       const rect = heartTarget.getBoundingClientRect();
       targetX = rect.left + rect.width / 2;
       targetY = rect.top + rect.height / 2;
+
       bowAngle = Math.atan2(targetY - bowY, targetX - bowX);
       renderBow(0);
     }
@@ -332,7 +351,7 @@
     function renderBow(pull) {
       const deg = bowAngle * (180 / Math.PI);
       bowGroup.setAttribute('transform', `translate(${bowX}, ${bowY}) rotate(${deg})`);
-      bowString.setAttribute('points', `0,-70 ${-pull},0 0,70`);
+      bowString.setAttribute('points', `0,-65 ${-pull},0 0,65`);
 
       if (!arrowLaunched) {
         const offsetX = Math.cos(bowAngle) * (-pull);
@@ -344,7 +363,7 @@
     window.addEventListener('resize', updatePositions);
     updatePositions();
 
-    function startDrag() {
+    function startDrag(e) {
       if (arrowLaunched) return;
       isDragging = true;
     }
@@ -356,8 +375,9 @@
 
       const dx = bowX - clientX;
       const dy = bowY - clientY;
-      pullDist = Math.min(Math.max(Math.hypot(dx, dy) * 0.65, 0), 80);
+      pullDist = Math.min(Math.max(Math.hypot(dx, dy) * 0.65, 0), 75);
 
+      // Always keep arrow aimed towards the heart so it never misses on mobile
       bowAngle = Math.atan2(targetY - bowY, targetX - bowX);
       renderBow(pullDist);
     }
@@ -366,7 +386,7 @@
       if (!isDragging || arrowLaunched) return;
       isDragging = false;
 
-      if (pullDist > 20) {
+      if (pullDist > 18) {
         launchArrow();
       } else {
         pullDist = 0;
@@ -378,21 +398,21 @@
     window.addEventListener('mousemove', onDrag);
     window.addEventListener('mouseup', endDrag);
 
-    bowSvg.addEventListener('touchstart', startDrag);
-    window.addEventListener('touchmove', onDrag);
+    bowSvg.addEventListener('touchstart', startDrag, { passive: true });
+    window.addEventListener('touchmove', onDrag, { passive: false });
     window.addEventListener('touchend', endDrag);
 
     function launchArrow() {
       arrowLaunched = true;
-      bowString.setAttribute('points', `0,-70 0,0 0,70`);
+      bowString.setAttribute('points', `0,-65 0,0 0,65`);
 
-      let startX = bowX;
-      let startY = bowY;
+      const startX = bowX;
+      const startY = bowY;
       const deg = bowAngle * (180 / Math.PI);
       let progress = 0;
 
       function animateArrow() {
-        progress += 0.06;
+        progress += 0.065;
         const curX = startX + (targetX - startX) * progress;
         const curY = startY + (targetY - startY) * progress;
         arrowGroup.setAttribute('transform', `translate(${curX}, ${curY}) rotate(${deg})`);
@@ -408,20 +428,24 @@
 
     /* ================= SCENE 2 TRANSITION ================= */
     function triggerScene2() {
-      pinkBurst.style.left = `${targetX}px`;
-      pinkBurst.style.top = `${targetY}px`;
-      pinkBurst.style.transform = 'translate(-50%, -50%) scale(240)';
+      const xPct = Math.round((targetX / window.innerWidth) * 100);
+      const yPct = Math.round((targetY / window.innerHeight) * 100);
+      pinkWipe.style.clipPath = `circle(0% at ${xPct}% ${yPct}%)`;
+
+      requestAnimationFrame(() => {
+        pinkWipe.style.clipPath = `circle(150% at ${xPct}% ${yPct}%)`;
+      });
 
       setTimeout(() => {
         document.getElementById('scene1').classList.add('hidden');
         const scene2 = document.getElementById('scene2');
         scene2.classList.remove('hidden');
         setTimeout(() => scene2.classList.add('active'), 50);
-        setTimeout(triggerScene3, 4000);
-      }, 850);
+        setTimeout(triggerScene3, 3800);
+      }, 820);
     }
 
-    /* ================= SCENE 3 LOGIC (FULL HEART TREE) ================= */
+    /* ================= SCENE 3 LOGIC (CENTERED HEART TREE) ================= */
     function triggerScene3() {
       document.getElementById('scene2').classList.add('hidden');
       document.getElementById('scene3').classList.remove('hidden');
@@ -431,31 +455,31 @@
     function initTreeCanvas() {
       const canvas = document.getElementById('tree-canvas');
       const ctx = canvas.getContext('2d');
-      canvas.width = window.innerWidth;
-      canvas.height = window.innerHeight;
 
-      const isMobile = canvas.width < 768;
+      const dpr = window.devicePixelRatio || 1;
+      const W = window.innerWidth;
+      const H = window.innerHeight;
+      canvas.width = W * dpr;
+      canvas.height = H * dpr;
+      ctx.scale(dpr, dpr);
 
-      // Unified scale so branches & heart canopy ALWAYS match 100%
-      const heartScale = isMobile
-        ? Math.min(canvas.width * 0.022, canvas.height * 0.012)
-        : Math.min(canvas.width, canvas.height) * 0.0135;
+      // Fit perfectly on any mobile width & height
+      const heartScale = Math.min(W * 0.023, H * 0.0115);
 
-      const treeBaseX = isMobile ? canvas.width * 0.56 : canvas.width * 0.68;
-      const treeBaseY = canvas.height;
+      const treeBaseX = W * 0.5;
+      const treeBaseY = H;
 
-      // Position heart center comfortably in upper half
+      // Place the heart canopy nicely in the upper-middle area
       const heartCenterX = treeBaseX;
-      const heartCenterY = isMobile ? canvas.height * 0.36 : canvas.height * 0.42;
+      const heartCenterY = H * 0.35;
 
-      // Trunk splits right at the lower inside of the heart
-      const trunkTopY = heartCenterY + heartScale * 9;
+      // Trunk ends inside the bottom of the heart canopy
+      const trunkTopY = heartCenterY + heartScale * 8.5;
 
       let branches = [];
       let balloons = [];
       let floatingHearts = [];
 
-      // Keep branches strictly proportional to heartScale so they stay INSIDE the heart
       function generateBranches(x1, y1, angle, length, depth) {
         if (depth === 0) return;
         const x2 = x1 + Math.cos(angle) * length;
@@ -468,43 +492,40 @@
           started: depth === 5
         });
 
-        const spread = 0.32 + Math.random() * 0.14;
+        const spread = 0.34 + Math.random() * 0.12;
         generateBranches(x2, y2, angle - spread, length * 0.72, depth - 1);
         generateBranches(x2, y2, angle + spread, length * 0.72, depth - 1);
         if (depth >= 4) {
-          generateBranches(x2, y2, angle + (Math.random() - 0.5) * 0.25, length * 0.75, depth - 1);
+          generateBranches(x2, y2, angle + (Math.random() - 0.5) * 0.22, length * 0.74, depth - 1);
         }
       }
 
-      // Initial branch length is locked to heartScale (6.2 * heartScale) so branches never poke out!
-      generateBranches(treeBaseX, trunkTopY, -Math.PI / 2, heartScale * 6.2, 5);
+      // Branches strictly sized to stay inside the heart canopy
+      generateBranches(treeBaseX, trunkTopY, -Math.PI / 2, heartScale * 5.8, 5);
 
-      // Generate dense Heart-Shaped Canopy covering all branches
       const palette = [
         '#e82578', '#ff5c9e', '#ff9ebb', '#c90f64',
         '#f4a261', '#ffd166', '#d91b6b', '#ff758f'
       ];
 
-      const totalHearts = 450;
-      for (let i = 0; i < totalHearts; i++) {
+      // 460 lush 3D heart leaves filling the entire canopy
+      for (let i = 0; i < 460; i++) {
         const t = Math.random() * Math.PI * 2;
-        // Favor filling the whole heart evenly up to the edges
         const r = Math.pow(Math.random(), 0.42);
         const hx = 16 * Math.pow(Math.sin(t), 3);
-        const hy = -(13 * Math.cos(t) - 5 * Math.cos(2 * t) - 2 * Math.cos(3 * t) - Math.cos(4 * t));
+        const hy = -(13 * Math.cos(t) - 5 * Math.cos(2 * t) - 2 * Math.cos(3 * t) - 1 * Math.cos(4 * t));
 
         balloons.push({
-          x: heartCenterX + hx * heartScale * r + (Math.random() - 0.5) * heartScale * 1.2,
-          y: heartCenterY + hy * heartScale * r + (Math.random() - 0.5) * heartScale * 1.2,
+          x: heartCenterX + hx * heartScale * r + (Math.random() - 0.5) * heartScale * 1.1,
+          y: heartCenterY + hy * heartScale * r + (Math.random() - 0.5) * heartScale * 1.1,
           size: 0,
-          maxSize: heartScale * (1.1 + Math.random() * 1.15),
+          maxSize: heartScale * (1.15 + Math.random() * 1.1),
           color: palette[Math.floor(Math.random() * palette.length)],
-          delay: 55 + Math.random() * 85,
-          angle: (Math.random() - 0.5) * 0.7
+          delay: 50 + Math.random() * 80,
+          angle: (Math.random() - 0.5) * 0.65
         });
       }
 
-      // Draw actual 3D glossy Heart Leaf / Balloon
       function drawHeartBalloon(x, y, size, color, angle) {
         if (size <= 0.3) return;
         ctx.save();
@@ -512,7 +533,7 @@
         ctx.rotate(angle);
 
         ctx.beginPath();
-        const s = size * 0.85;
+        const s = size * 0.88;
         ctx.moveTo(0, s * 0.35);
         ctx.bezierCurveTo(-s * 1.1, -s * 0.4, -s * 0.55, -s * 1.15, 0, -s * 0.45);
         ctx.bezierCurveTo(s * 0.55, -s * 1.15, s * 1.1, -s * 0.4, 0, s * 0.35);
@@ -521,11 +542,10 @@
         ctx.fillStyle = color;
         ctx.fill();
 
-        // 3D Glossy Highlight on each heart
         const grad = ctx.createRadialGradient(-s * 0.25, -s * 0.45, s * 0.05, 0, 0, s * 1.1);
         grad.addColorStop(0, 'rgba(255, 255, 255, 0.65)');
         grad.addColorStop(0.45, 'rgba(255, 255, 255, 0)');
-        grad.addColorStop(1, 'rgba(0, 0, 0, 0.2)');
+        grad.addColorStop(1, 'rgba(0, 0, 0, 0.18)');
         ctx.fillStyle = grad;
         ctx.fill();
 
@@ -536,28 +556,28 @@
       let trunkProgress = 0;
 
       function animateScene3() {
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        ctx.clearRect(0, 0, W, H);
         frame++;
 
-        // 1. Grow tapered main trunk
+        // 1. Grow main trunk
         if (trunkProgress < 1) {
-          trunkProgress += 0.03;
+          trunkProgress += 0.032;
         }
         const curTrunkY = treeBaseY - (treeBaseY - trunkTopY) * Math.min(trunkProgress, 1);
 
         ctx.strokeStyle = '#3d1e10';
-        ctx.lineWidth = isMobile ? 12 : 16;
+        ctx.lineWidth = 11;
         ctx.lineCap = 'round';
         ctx.beginPath();
         ctx.moveTo(treeBaseX, treeBaseY);
         ctx.lineTo(treeBaseX, curTrunkY);
         ctx.stroke();
 
-        // 2. Grow branches inside heart region
+        // 2. Grow branches
         if (trunkProgress >= 1) {
           branches.forEach(b => {
             if (b.started && b.progress < 1) {
-              b.progress += 0.06;
+              b.progress += 0.065;
               if (b.progress >= 1) {
                 branches.forEach(child => {
                   if (child.depth === b.depth - 1 && Math.hypot(child.x1 - b.x2, child.y1 - b.y2) < 2) {
@@ -573,7 +593,7 @@
               const curY = b.y1 + (b.y2 - b.y1) * p;
 
               ctx.strokeStyle = '#3d1e10';
-              ctx.lineWidth = Math.max(b.depth * (isMobile ? 1.6 : 2.2), 1.5);
+              ctx.lineWidth = Math.max(b.depth * 1.6, 1.4);
               ctx.beginPath();
               ctx.moveTo(b.x1, b.y1);
               ctx.lineTo(curX, curY);
@@ -582,8 +602,8 @@
           });
         }
 
-        // 3. Show text & bloom full heart canopy
-        if (frame > 65) {
+        // 3. Show card & bloom heart canopy
+        if (frame > 60) {
           document.getElementById('final-text').classList.add('show');
         }
 
@@ -592,20 +612,20 @@
             if (bl.size < bl.maxSize) {
               bl.size += (bl.maxSize - bl.size) * 0.12;
             }
-            const swayX = Math.sin(frame * 0.03 + bl.delay) * 1.5;
-            const swayY = Math.cos(frame * 0.025 + bl.delay) * 1.5;
+            const swayX = Math.sin(frame * 0.03 + bl.delay) * 1.4;
+            const swayY = Math.cos(frame * 0.025 + bl.delay) * 1.4;
             drawHeartBalloon(bl.x + swayX, bl.y + swayY, bl.size, bl.color, bl.angle);
           }
         });
 
-        // 4. Floating heart petals drifting in the wind
-        if (frame > 110 && Math.random() < 0.1) {
+        // 4. Floating heart petals
+        if (frame > 105 && Math.random() < 0.1) {
           floatingHearts.push({
-            x: heartCenterX + (Math.random() - 0.5) * heartScale * 22,
-            y: heartCenterY + (Math.random() - 0.2) * heartScale * 14,
-            vx: -0.7 - Math.random() * 0.8,
-            vy: 0.4 + Math.random() * 0.6,
-            size: heartScale * (0.6 + Math.random() * 0.5),
+            x: heartCenterX + (Math.random() - 0.5) * heartScale * 20,
+            y: heartCenterY + (Math.random() - 0.2) * heartScale * 12,
+            vx: (Math.random() - 0.5) * 1.2,
+            vy: 0.45 + Math.random() * 0.55,
+            size: heartScale * (0.55 + Math.random() * 0.45),
             color: palette[Math.floor(Math.random() * palette.length)],
             angle: (Math.random() - 0.5) * 0.8,
             alpha: 1
@@ -616,7 +636,7 @@
           fh.x += fh.vx;
           fh.y += fh.vy;
           fh.angle += 0.01;
-          fh.alpha -= 0.004;
+          fh.alpha -= 0.0045;
           if (fh.alpha <= 0) {
             floatingHearts.splice(idx, 1);
           } else {
