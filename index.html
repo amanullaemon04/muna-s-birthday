@@ -504,9 +504,8 @@
 </head>
 <body>
 
-  <audio id="bg-music" loop>
-    <source src="song.mp3" type="audio/mpeg">
-  </audio>
+  <!-- Audio Element -->
+  <audio id="bg-music" loop></audio>
 
   <!-- INTRO STAGE -->
   <div id="intro-stage">
@@ -595,7 +594,7 @@
       </div>
     </div>
 
-    <!-- Music Player Window with Lyrics -->
+    <!-- Music Player Window with Multiple Songs Support -->
     <div id="music-window">
       <div class="win95-header">
         <span>MusicPlayer.exe</span>
@@ -608,14 +607,12 @@
           <div class="vinyl-center"></div>
         </div>
         <div class="lyrics-box" id="lyrics-display">
-          🎵 Playing: There Is a Light That Never Goes Out<br><br>
-          And if a double-decker bus<br>
-          Crashes into us<br>
-          To die by your side<br>
-          Is such a heavenly way to die
+          🎵 Select a song and press Play...
         </div>
         <div class="player-controls">
+          <button class="win95-action-btn" onclick="prevSong()">⏮ Prev</button>
           <button class="win95-action-btn" onclick="togglePlayMusic()" id="play-btn">Play ▶</button>
+          <button class="win95-action-btn" onclick="nextSong()">Next ⏭</button>
         </div>
       </div>
     </div>
@@ -835,20 +832,41 @@
       document.getElementById('cake-window').style.display = 'none';
     }
 
+    /* Multiple Songs Playlist Logic */
+    const playlist = [
+      {
+        src: "song1.mp3",
+        title: "There Is a Light That Never Goes Out",
+        lyrics: "🎵 Playing: There Is a Light That Never Goes Out<br><br>And if a double-decker bus<br>Crashes into us<br>To die by your side<br>Is such a heavenly way to die"
+      },
+      {
+        src: "song2.mp3",
+        title: "Song Two Title Here",
+        lyrics: "🎵 Playing: Song Two Name<br><br>Ekhane song 2 er lyrics ba line gulo<br>ekdom sundor vabe show korbe!"
+      }
+    ];
+
+    let currentSongIndex = 0;
+    const music = document.getElementById('bg-music');
+
+    function loadSong(index) {
+      music.src = playlist[index].src;
+      document.getElementById('lyrics-display').innerHTML = playlist[index].lyrics;
+    }
+
     function openMusicPlayer() {
       document.getElementById('music-window').style.display = 'block';
+      loadSong(currentSongIndex);
     }
 
     function closeMusicPlayer() {
       document.getElementById('music-window').style.display = 'none';
-      const music = document.getElementById('bg-music');
       music.pause();
       document.getElementById('vinyl').classList.remove('playing');
       document.getElementById('play-btn').innerText = "Play ▶";
     }
 
     function togglePlayMusic() {
-      const music = document.getElementById('bg-music');
       const vinyl = document.getElementById('vinyl');
       const playBtn = document.getElementById('play-btn');
 
@@ -861,6 +879,22 @@
         vinyl.classList.remove('playing');
         playBtn.innerText = "Play ▶";
       }
+    }
+
+    function nextSong() {
+      currentSongIndex = (currentSongIndex + 1) % playlist.length;
+      loadSong(currentSongIndex);
+      music.play();
+      document.getElementById('vinyl').classList.add('playing');
+      document.getElementById('play-btn').innerText = "Pause ⏸";
+    }
+
+    function prevSong() {
+      currentSongIndex = (currentSongIndex - 1 + playlist.length) % playlist.length;
+      loadSong(currentSongIndex);
+      music.play();
+      document.getElementById('vinyl').classList.add('playing');
+      document.getElementById('play-btn').innerText = "Pause ⏸";
     }
   </script>
 </body>
