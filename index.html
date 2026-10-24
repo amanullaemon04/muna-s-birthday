@@ -285,7 +285,7 @@
       50% { box-shadow: 0 8px 28px rgba(255, 42, 109, 0.7); }
     }
 
-    /* ---------------- SCENE 4: RETRO DESKTOP (VIDEO STYLE) ---------------- */
+    /* ---------------- SCENE 4: RETRO DESKTOP ---------------- */
     #retro-desktop {
       position: fixed;
       inset: 0;
@@ -324,6 +324,7 @@
       border-color: #fff #808080 #808080 #fff;
       box-shadow: 4px 4px 15px rgba(0,0,0,0.3);
       margin: auto;
+      transition: transform 0.4s ease, opacity 0.4s ease;
     }
 
     .win95-header {
@@ -506,38 +507,38 @@
   <div id="retro-desktop">
     <div class="desktop-wallpaper"></div>
 
-    <div class="win95-window">
+    <div class="win95-window" id="cake-window">
       <div class="win95-header">
         <span>Wish.exe</span>
         <div class="win95-btns">
-          <div class="win95-btn">_</div>
-          <div class="win95-btn">X</div>
+          <div class="win95-btn" onclick="closeCakeWindow()">_</div>
+          <div class="win95-btn" onclick="closeCakeWindow()">X</div>
         </div>
       </div>
       <div class="win95-body">
         <div class="cake-icon">🎂</div>
-        <div class="win95-text">Look, will you blow the cake?</div>
-        <div class="win95-actions">
-          <button class="win95-action-btn" onclick="alert('Happy Birthday! 🎉')">Yes</button>
-          <button class="win95-action-btn" onclick="alert('Happy Birthday! 🎉')">No</button>
+        <div class="win95-text" id="cake-question">Look, will you blow the cake?</div>
+        <div class="win95-actions" id="cake-actions">
+          <button class="win95-action-btn" onclick="handleYes()">Yes</button>
+          <button class="win95-action-btn" onclick="handleNo()">No</button>
         </div>
       </div>
     </div>
 
     <div class="desktop-icons">
-      <div class="desktop-icon" onclick="alert('Music Player')">
+      <div class="desktop-icon" onclick="alert('Opening Music Player... 💿')">
         <div class="icon-box">💿</div>
         <div class="icon-label">Music</div>
       </div>
-      <div class="desktop-icon" onclick="alert('Gallery')">
+      <div class="desktop-icon" onclick="alert('Opening Photo Gallery... 📷')">
         <div class="icon-box">📷</div>
         <div class="icon-label">Gallery</div>
       </div>
-      <div class="desktop-icon" onclick="alert('Letter')">
+      <div class="desktop-icon" onclick="alert('Opening Love Letter... 💌')">
         <div class="icon-box">💌</div>
         <div class="icon-label">Letter</div>
       </div>
-      <div class="desktop-icon" onclick="alert('Traits')">
+      <div class="desktop-icon" onclick="alert('Opening Traits... ❓')">
         <div class="icon-box">❓</div>
         <div class="icon-label">Traits</div>
       </div>
@@ -782,7 +783,7 @@
       animateScene3();
     }
 
-    /* ================= SCENE 4: RETRO DESKTOP ================= */
+    /* ================= SCENE 4: RETRO DESKTOP LOGIC ================= */
     function openRetroDesktop() {
       isIntroActive = false;
       const introStage = document.getElementById('intro-stage');
@@ -796,6 +797,19 @@
       setTimeout(() => {
         introStage.style.display = 'none';
       }, 800);
+    }
+
+    function handleYes() {
+      document.getElementById('cake-question').innerText = "Yay! Happy Birthday! 🎉💖";
+      document.getElementById('cake-actions').style.display = 'none';
+    }
+
+    function handleNo() {
+      document.getElementById('cake-question').innerText = "Are you sure about that? Give me a chance!";
+    }
+
+    function closeCakeWindow() {
+      document.getElementById('cake-window').style.display = 'none';
     }
   </script>
 </body>
