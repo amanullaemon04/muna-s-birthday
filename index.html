@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
   <title>Happy Birthday, My Love 💕</title>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,400&family=Dancing+Script:wght@600;700&family=Great+Vibes&family=Playfair+Display:ital,wght@0,700;1,400&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,400&family=Dancing+Script:wght@600;700&family=Great+Vibes&family=Playfair+Display:ital,wght@0,700;1,400&family=Poppins:wght@300;400;500;600&family=VT323&display=swap" rel="stylesheet">
   
   <style>
     * {
@@ -285,287 +285,150 @@
       50% { box-shadow: 0 8px 28px rgba(255, 42, 109, 0.7); }
     }
 
-    /* ---------------- SCENE 4: CELEBRATION PAGE ---------------- */
-    #celebration-page {
+    /* ---------------- SCENE 4: RETRO DESKTOP (VIDEO STYLE) ---------------- */
+    #retro-desktop {
       position: fixed;
       inset: 0;
       width: 100%;
       height: 100%;
-      overflow-y: auto;
-      overflow-x: hidden;
-      -webkit-overflow-scrolling: touch;
-      scroll-behavior: smooth;
-      background: linear-gradient(180deg, #ffdde8 0%, #ffc2d9 45%, #fff5f8 100%);
-      font-family: 'Poppins', sans-serif;
-      z-index: 40;
+      z-index: 60;
       display: none;
       opacity: 0;
       transition: opacity 0.8s ease;
+      font-family: 'VT323', monospace;
     }
 
-    #celebration-page.active {
-      display: block;
+    #retro-desktop.active {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      align-items: center;
       opacity: 1;
     }
 
-    .particles-bg {
-      position: fixed;
-      inset: 0;
-      pointer-events: none;
-      z-index: 1;
-      overflow: hidden;
-    }
-
-    .particle {
+    .desktop-wallpaper {
       position: absolute;
-      font-size: 1.1rem;
-      opacity: 0.55;
-      animation: floatUp linear infinite;
+      inset: 0;
+      background: linear-gradient(135deg, #ffd1dc 0%, #c2e9fb 100%);
+      opacity: 0.95;
+      z-index: 1;
     }
 
-    @keyframes floatUp {
-      0% { transform: translateY(105vh) rotate(0deg); opacity: 0; }
-      15% { opacity: 0.65; }
-      85% { opacity: 0.65; }
-      100% { transform: translateY(-10vh) rotate(360deg); opacity: 0; }
-    }
-
-    .hero {
+    .win95-window {
       position: relative;
-      min-height: 100vh;
+      z-index: 5;
+      width: 88%;
+      max-width: 330px;
+      background: #c0c0c0;
+      border: 2px solid;
+      border-color: #fff #808080 #808080 #fff;
+      box-shadow: 4px 4px 15px rgba(0,0,0,0.3);
+      margin: auto;
+    }
+
+    .win95-header {
+      background: linear-gradient(90deg, #000080, #1084d0);
+      color: #fff;
+      padding: 4px 8px;
+      font-size: 1rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-family: 'Poppins', sans-serif;
+      font-weight: 600;
+    }
+
+    .win95-btns {
+      display: flex;
+      gap: 3px;
+    }
+
+    .win95-btn {
+      width: 16px;
+      height: 16px;
+      background: #c0c0c0;
+      border: 1px solid;
+      border-color: #fff #808080 #808080 #fff;
+      font-size: 0.65rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #000;
+      cursor: pointer;
+    }
+
+    .win95-body {
+      padding: 20px 15px;
+      text-align: center;
+      color: #000;
+    }
+
+    .cake-icon {
+      font-size: 2.5rem;
+      margin-bottom: 10px;
+    }
+
+    .win95-text {
+      font-size: 1.3rem;
+      margin-bottom: 18px;
+      letter-spacing: 1px;
+    }
+
+    .win95-actions {
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+    }
+
+    .win95-action-btn {
+      background: #c0c0c0;
+      border: 2px solid;
+      border-color: #fff #808080 #808080 #fff;
+      padding: 4px 22px;
+      font-family: 'VT323', monospace;
+      font-size: 1.2rem;
+      cursor: pointer;
+    }
+
+    .desktop-icons {
+      position: relative;
+      z-index: 5;
       width: 100%;
+      padding: 20px;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 15px;
+      justify-items: center;
+    }
+
+    .desktop-icon {
       display: flex;
       flex-direction: column;
-      justify-content: center;
       align-items: center;
-      text-align: center;
-      padding: 30px 20px;
-      z-index: 2;
-    }
-
-    .typewriter {
-      font-family: 'Dancing Script', cursive;
-      font-size: 3rem;
-      color: #881337;
-      margin-bottom: 14px;
-      line-height: 1.2;
-      text-shadow: 0 2px 10px rgba(255, 255, 255, 0.6);
-    }
-
-    .subtitle {
-      font-size: 0.98rem;
-      color: #6b2138;
-      max-width: 330px;
-      line-height: 1.6;
-      margin-bottom: 24px;
-    }
-
-    .floating-hearts {
-      display: flex;
-      gap: 14px;
-      justify-content: center;
-      margin-bottom: 30px;
-      font-size: 1.45rem;
-    }
-
-    .floating-hearts .heart {
-      display: inline-block;
-      animation: bounceHeart 1.8s ease-in-out infinite;
-    }
-    .floating-hearts .heart:nth-child(2) { animation-delay: 0.2s; }
-    .floating-hearts .heart:nth-child(3) { animation-delay: 0.4s; }
-    .floating-hearts .heart:nth-child(4) { animation-delay: 0.6s; }
-    .floating-hearts .heart:nth-child(5) { animation-delay: 0.8s; }
-
-    @keyframes bounceHeart {
-      0%, 100% { transform: translateY(0) scale(1); }
-      50% { transform: translateY(-10px) scale(1.15); }
-    }
-
-    .scroll-indicator {
-      position: absolute;
-      bottom: 28px;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 24px;
-      height: 40px;
-      border: 2px solid #9f1239;
-      border-radius: 14px;
-      display: flex;
-      justify-content: center;
-      padding-top: 6px;
-      opacity: 0.7;
-    }
-
-    .scroll-dot {
-      width: 4px;
-      height: 8px;
-      background-color: #9f1239;
-      border-radius: 2px;
-      animation: scrollWheel 1.6s infinite;
-    }
-
-    @keyframes scrollWheel {
-      0% { transform: translateY(0); opacity: 1; }
-      100% { transform: translateY(14px); opacity: 0; }
-    }
-
-    .gallery-section {
-      position: relative;
-      z-index: 2;
-      padding: 50px 18px 60px;
-      background: linear-gradient(180deg, rgba(255,255,255,0.4) 0%, #fff 35%, #fff5f8 100%);
-      border-top-left-radius: 32px;
-      border-top-right-radius: 32px;
-    }
-
-    .section-title {
-      font-family: 'Dancing Script', cursive;
-      font-size: 2.6rem;
-      color: #881337;
-      text-align: center;
-      margin-bottom: 30px;
-    }
-
-    .gallery-grid {
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: 22px;
-      max-width: 420px;
-      margin: 0 auto;
-    }
-
-    .photo-card {
-      border-radius: 18px;
-      overflow: hidden;
-      background: #fff;
-      box-shadow: 0 10px 25px rgba(136, 19, 55, 0.12);
-      position: relative;
-    }
-
-    .photo-container {
-      position: relative;
-      width: 100%;
-      height: 290px;
-      overflow: hidden;
-    }
-
-    .photo-container img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      transition: transform 0.5s ease;
-    }
-
-    .photo-card:active .photo-container img {
-      transform: scale(1.05);
-    }
-
-    .photo-overlay {
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(to top, rgba(0, 0, 0, 0.72) 0%, rgba(0, 0, 0, 0.1) 50%, transparent 100%);
-      display: flex;
-      align-items: flex-end;
-      justify-content: space-between;
-      padding: 16px;
-      color: #fff;
-    }
-
-    .photo-caption {
-      font-size: 0.92rem;
-      font-weight: 400;
-      padding-right: 10px;
-      text-shadow: 0 1px 4px rgba(0,0,0,0.5);
-    }
-
-    .like-btn {
-      background: rgba(255, 255, 255, 0.25);
-      backdrop-filter: blur(4px);
-      border: none;
-      width: 38px;
-      height: 38px;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 1.15rem;
       cursor: pointer;
-      flex-shrink: 0;
-      transition: transform 0.2s ease, background 0.2s ease;
-    }
-
-    .like-btn.liked {
-      background: rgba(255, 42, 109, 0.25);
-      transform: scale(1.15);
-    }
-
-    .message-section {
-      position: relative;
-      z-index: 2;
-      padding: 60px 18px 40px;
-      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-      color: #fff;
       text-align: center;
     }
 
-    .message-card {
-      max-width: 440px;
-      margin: 0 auto;
-      background: rgba(255, 255, 255, 0.13);
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
-      border: 1px solid rgba(255, 255, 255, 0.25);
-      border-radius: 24px;
-      padding: 32px 22px;
-      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
-    }
-
-    .message-title {
-      font-family: 'Dancing Script', cursive;
-      font-size: 2.4rem;
-      color: #fff;
-      margin-bottom: 20px;
-    }
-
-    .message-text {
-      font-size: 0.92rem;
-      line-height: 1.75;
-      color: rgba(255, 255, 255, 0.92);
-      margin-bottom: 18px;
-    }
-
-    .message-signature {
-      font-family: 'Dancing Script', cursive;
-      font-size: 1.45rem;
-      color: #ffd1dc;
-      margin-top: 22px;
-      margin-bottom: 18px;
-      line-height: 1.4;
-    }
-
-    .message-hearts {
+    .icon-box {
+      width: 48px;
+      height: 48px;
+      background: rgba(255, 255, 255, 0.65);
+      border: 1px dashed #000080;
+      border-radius: 6px;
       display: flex;
+      align-items: center;
       justify-content: center;
-      gap: 14px;
-      font-size: 1.4rem;
+      font-size: 1.5rem;
+      margin-bottom: 4px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
     }
 
-    .heart-animation {
-      display: inline-block;
-      animation: bounceHeart 1.8s infinite;
-    }
-    .heart-animation:nth-child(2) { animation-delay: 0.3s; }
-    .heart-animation:nth-child(3) { animation-delay: 0.6s; }
-
-    .footer {
-      text-align: center;
-      padding: 20px 15px;
-      background: #881337;
-      color: #ffdde8;
-      font-size: 0.8rem;
-      position: relative;
-      z-index: 2;
+    .icon-label {
+      font-size: 1rem;
+      color: #000;
+      background: rgba(255,255,255,0.7);
+      padding: 1px 6px;
+      border-radius: 4px;
     }
   </style>
 </head>
@@ -593,7 +456,6 @@
         <ellipse cx="62" cy="52" rx="18" ry="10" transform="rotate(-30 62 52)" fill="rgba(255,255,255,0.45)" filter="url(#blurHighlight)" />
       </svg>
 
-      <!-- Vertically Aimed Bow & Arrow -->
       <div id="bow-container">
         <svg id="bow-svg" viewBox="-70 -70 140 140">
           <g id="bow-group" transform="rotate(-90)">
@@ -626,141 +488,60 @@
       </div>
     </div>
 
-    <!-- SCENE 3: Growing Heart Tree -->
+    <!-- SCENE 3: Heart Tree -->
     <div id="scene3" class="screen hidden">
       <canvas id="tree-canvas"></canvas>
       <div class="bottom-card" id="final-text">
         <div class="count-text">and... make it count</div>
         <div class="script-hb">Happy Birthday</div>
         <div class="bloom-sub">Here's to a year that blooms</div>
-        <button class="cta-button" onclick="openCelebrationPage()">
+        <button class="cta-button" onclick="openRetroDesktop()">
           Start the Celebration 🎉
         </button>
       </div>
     </div>
   </div>
 
-  <!-- ================= SCENE 4: CELEBRATION PAGE ================= -->
-  <div id="celebration-page">
-    <div class="particles-bg" id="particles-bg"></div>
+  <!-- ================= SCENE 4: RETRO DESKTOP ================= -->
+  <div id="retro-desktop">
+    <div class="desktop-wallpaper"></div>
 
-    <section class="hero" id="hero">
-      <h1 class="typewriter">Happy Birthday, Beautiful! 💕</h1>
-      <p class="subtitle">Today is all about celebrating you and the joy you bring to my life</p>
-      
-      <div class="floating-hearts">
-        <span class="heart">❤️</span>
-        <span class="heart">💖</span>
-        <span class="heart">💕</span>
-        <span class="heart">💗</span>
-        <span class="heart">💓</span>
-      </div>
-
-      <button class="cta-button" onclick="scrollToGallery()">
-        Start the Celebration 🎉
-      </button>
-
-      <div class="scroll-indicator" onclick="scrollToGallery()">
-        <div class="scroll-dot"></div>
-      </div>
-    </section>
-
-    <section class="gallery-section" id="gallery">
-      <h2 class="section-title">Our Beautiful Memories</h2>
-
-      <div class="gallery-grid">
-        <div class="photo-card">
-          <div class="photo-container">
-            <img src="https://images.unsplash.com/photo-1518199266791-5375a83190b7?auto=format&fit=crop&w=800&q=80" alt="Moment">
-            <div class="photo-overlay">
-              <div class="photo-caption">Every moment with you is magical ✨</div>
-              <button class="like-btn" onclick="toggleLike(this)"><span class="heart-icon">🤍</span></button>
-            </div>
-          </div>
-        </div>
-
-        <div class="photo-card">
-          <div class="photo-container">
-            <img src="https://images.unsplash.com/photo-1516589178581-6cd7833ae3b2?auto=format&fit=crop&w=800&q=80" alt="Moment">
-            <div class="photo-overlay">
-              <div class="photo-caption">Your smile lights up my world 💫</div>
-              <button class="like-btn" onclick="toggleLike(this)"><span class="heart-icon">🤍</span></button>
-            </div>
-          </div>
-        </div>
-
-        <div class="photo-card">
-          <div class="photo-container">
-            <img src="https://images.unsplash.com/photo-1522673607200-164d1b6ce486?auto=format&fit=crop&w=800&q=80" alt="Moment">
-            <div class="photo-overlay">
-              <div class="photo-caption">Adventures together 🌟</div>
-              <button class="like-btn" onclick="toggleLike(this)"><span class="heart-icon">🤍</span></button>
-            </div>
-          </div>
-        </div>
-
-        <div class="photo-card">
-          <div class="photo-container">
-            <img src="https://images.unsplash.com/photo-1494774157365-9e04c6720e47?auto=format&fit=crop&w=800&q=80" alt="Moment">
-            <div class="photo-overlay">
-              <div class="photo-caption">My heart belongs to you 💕</div>
-              <button class="like-btn" onclick="toggleLike(this)"><span class="heart-icon">🤍</span></button>
-            </div>
-          </div>
-        </div>
-
-        <div class="photo-card">
-          <div class="photo-container">
-            <img src="https://images.unsplash.com/photo-1529333166437-7750a6dd5a70?auto=format&fit=crop&w=800&q=80" alt="Moment">
-            <div class="photo-overlay">
-              <div class="photo-caption">Creating memories together 🌸</div>
-              <button class="like-btn" onclick="toggleLike(this)"><span class="heart-icon">🤍</span></button>
-            </div>
-          </div>
-        </div>
-
-        <div class="photo-card">
-          <div class="photo-container">
-            <img src="https://images.unsplash.com/photo-1511285560929-80b456fea0bc?auto=format&fit=crop&w=800&q=80" alt="Moment">
-            <div class="photo-overlay">
-              <div class="photo-caption">Forever and always ♾️</div>
-              <button class="like-btn" onclick="toggleLike(this)"><span class="heart-icon">🤍</span></button>
-            </div>
-          </div>
+    <div class="win95-window">
+      <div class="win95-header">
+        <span>Wish.exe</span>
+        <div class="win95-btns">
+          <div class="win95-btn">_</div>
+          <div class="win95-btn">X</div>
         </div>
       </div>
-    </section>
-
-    <section class="message-section" id="message">
-      <div class="message-card">
-        <h2 class="message-title">A Special Message for You</h2>
-        <div class="message-content">
-          <p class="message-text">
-            On this special day, I want you to know how grateful I am to have you in my life.
-            Your laughter fills my days with joy, your love gives me strength, and your presence
-            makes everything better. You are not just my girlfriend, you are my best friend,
-            my partner in crime, and the love of my life.
-          </p>
-          <p class="message-text">
-            Today, we celebrate you — your kindness, your beauty, your amazing spirit, and all
-            the wonderful things that make you uniquely you. I hope this new year of your life
-            brings you endless happiness, incredible adventures, and all your dreams come true.
-          </p>
-          <p class="message-signature">
-            Happy Birthday, my love! Here's to many more years of laughter, love, and beautiful memories together. 💕
-          </p>
-        </div>
-        <div class="message-hearts">
-          <span class="heart-animation">💖</span>
-          <span class="heart-animation">💕</span>
-          <span class="heart-animation">💗</span>
+      <div class="win95-body">
+        <div class="cake-icon">🎂</div>
+        <div class="win95-text">Look, will you blow the cake?</div>
+        <div class="win95-actions">
+          <button class="win95-action-btn" onclick="alert('Happy Birthday! 🎉')">Yes</button>
+          <button class="win95-action-btn" onclick="alert('Happy Birthday! 🎉')">No</button>
         </div>
       </div>
-    </section>
+    </div>
 
-    <footer class="footer">
-      Made with ❤️ for the most amazing person in the world
-    </footer>
+    <div class="desktop-icons">
+      <div class="desktop-icon" onclick="alert('Music Player')">
+        <div class="icon-box">💿</div>
+        <div class="icon-label">Music</div>
+      </div>
+      <div class="desktop-icon" onclick="alert('Gallery')">
+        <div class="icon-box">📷</div>
+        <div class="icon-label">Gallery</div>
+      </div>
+      <div class="desktop-icon" onclick="alert('Letter')">
+        <div class="icon-box">💌</div>
+        <div class="icon-label">Letter</div>
+      </div>
+      <div class="desktop-icon" onclick="alert('Traits')">
+        <div class="icon-box">❓</div>
+        <div class="icon-label">Traits</div>
+      </div>
+    </div>
   </div>
 
   <script>
@@ -781,7 +562,6 @@
     let arrowLaunched = false;
 
     function renderBow(pull) {
-      // Base rotation is -90 degrees (pointing straight up towards the heart)
       const baseRot = -90;
       bowGroup.setAttribute('transform', `rotate(${baseRot})`);
       bowString.setAttribute('points', `0,-55 ${-pull},0 0,55`);
@@ -801,14 +581,11 @@
     function onDrag(e) {
       if (!isDragging || arrowLaunched) return;
       const clientY = e.touches ? e.touches[0].clientY : e.clientY;
-
       const bowRect = bowContainer.getBoundingClientRect();
       const centerY = bowRect.top + bowRect.height / 2;
 
-      // Dragging downwards pulls the string back
       const dy = clientY - centerY;
       pullDist = Math.min(Math.max(dy * 0.7, 0), 55);
-
       renderBow(pullDist);
     }
 
@@ -895,7 +672,6 @@
 
       let branches = [];
       let balloons = [];
-      let floatingHearts = [];
 
       function generateBranches(x1, y1, angle, length, depth) {
         if (depth === 0) return;
@@ -907,16 +683,13 @@
         const spread = 0.34 + Math.random() * 0.12;
         generateBranches(x2, y2, angle - spread, length * 0.72, depth - 1);
         generateBranches(x2, y2, angle + spread, length * 0.72, depth - 1);
-        if (depth >= 4) {
-          generateBranches(x2, y2, angle + (Math.random() - 0.5) * 0.22, length * 0.74, depth - 1);
-        }
       }
 
       generateBranches(treeBaseX, trunkTopY, -Math.PI / 2, heartScale * 5.8, 5);
 
       const palette = ['#e82578', '#ff5c9e', '#ff9ebb', '#c90f64', '#f4a261', '#ffd166', '#d91b6b', '#ff758f'];
 
-      for (let i = 0; i < 450; i++) {
+      for (let i = 0; i < 400; i++) {
         const t = Math.random() * Math.PI * 2;
         const r = Math.pow(Math.random(), 0.42);
         const hx = 16 * Math.pow(Math.sin(t), 3);
@@ -948,14 +721,6 @@
 
         ctx.fillStyle = color;
         ctx.fill();
-
-        const grad = ctx.createRadialGradient(-s * 0.25, -s * 0.45, s * 0.05, 0, 0, s * 1.1);
-        grad.addColorStop(0, 'rgba(255, 255, 255, 0.65)');
-        grad.addColorStop(0.45, 'rgba(255, 255, 255, 0)');
-        grad.addColorStop(1, 'rgba(0, 0, 0, 0.18)');
-        ctx.fillStyle = grad;
-        ctx.fill();
-
         ctx.restore();
       }
 
@@ -982,15 +747,7 @@
           branches.forEach(b => {
             if (b.started && b.progress < 1) {
               b.progress += 0.065;
-              if (b.progress >= 1) {
-                branches.forEach(child => {
-                  if (child.depth === b.depth - 1 && Math.hypot(child.x1 - b.x2, child.y1 - b.y2) < 2) {
-                    child.started = true;
-                  }
-                });
-              }
             }
-
             if (b.started) {
               const p = Math.min(b.progress, 1);
               const curX = b.x1 + (b.x2 - b.x1) * p;
@@ -1015,37 +772,7 @@
             if (bl.size < bl.maxSize) {
               bl.size += (bl.maxSize - bl.size) * 0.12;
             }
-            const swayX = Math.sin(frame * 0.03 + bl.delay) * 1.4;
-            const swayY = Math.cos(frame * 0.025 + bl.delay) * 1.4;
-            drawHeartBalloon(bl.x + swayX, bl.y + swayY, bl.size, bl.color, bl.angle);
-          }
-        });
-
-        if (frame > 100 && Math.random() < 0.1) {
-          floatingHearts.push({
-            x: heartCenterX + (Math.random() - 0.5) * heartScale * 20,
-            y: heartCenterY + (Math.random() - 0.2) * heartScale * 12,
-            vx: (Math.random() - 0.5) * 1.2,
-            vy: 0.45 + Math.random() * 0.55,
-            size: heartScale * (0.55 + Math.random() * 0.45),
-            color: palette[Math.floor(Math.random() * palette.length)],
-            angle: (Math.random() - 0.5) * 0.8,
-            alpha: 1
-          });
-        }
-
-        floatingHearts.forEach((fh, idx) => {
-          fh.x += fh.vx;
-          fh.y += fh.vy;
-          fh.angle += 0.01;
-          fh.alpha -= 0.0045;
-          if (fh.alpha <= 0) {
-            floatingHearts.splice(idx, 1);
-          } else {
-            ctx.save();
-            ctx.globalAlpha = fh.alpha;
-            drawHeartBalloon(fh.x, fh.y, fh.size, fh.color, fh.angle);
-            ctx.restore();
+            drawHeartBalloon(bl.x, bl.y, bl.size, bl.color, bl.angle);
           }
         });
 
@@ -1055,45 +782,20 @@
       animateScene3();
     }
 
-    /* ================= SCENE 4 LOGIC ================= */
-    function openCelebrationPage() {
+    /* ================= SCENE 4: RETRO DESKTOP ================= */
+    function openRetroDesktop() {
       isIntroActive = false;
       const introStage = document.getElementById('intro-stage');
-      const celebPage = document.getElementById('celebration-page');
+      const retroDesktop = document.getElementById('retro-desktop');
 
       introStage.style.opacity = '0';
       introStage.style.pointerEvents = 'none';
 
-      celebPage.classList.add('active');
-      createParticles();
+      retroDesktop.classList.add('active');
 
       setTimeout(() => {
         introStage.style.display = 'none';
       }, 800);
-    }
-
-    function scrollToGallery() {
-      document.getElementById('gallery').scrollIntoView({ behavior: 'smooth' });
-    }
-
-    function toggleLike(btn) {
-      btn.classList.toggle('liked');
-      const icon = btn.querySelector('.heart-icon');
-      icon.textContent = btn.classList.contains('liked') ? '❤️' : '🤍';
-    }
-
-    function createParticles() {
-      const container = document.getElementById('particles-bg');
-      const icons = ['❤️', '💖', '💕', '🦋', '🌸', '✨'];
-      for (let i = 0; i < 18; i++) {
-        const span = document.createElement('span');
-        span.className = 'particle';
-        span.textContent = icons[Math.floor(Math.random() * icons.length)];
-        span.style.left = Math.random() * 100 + 'vw';
-        span.style.animationDuration = (7 + Math.random() * 8) + 's';
-        span.style.animationDelay = (Math.random() * 5) + 's';
-        container.appendChild(span);
-      }
     }
   </script>
 </body>
