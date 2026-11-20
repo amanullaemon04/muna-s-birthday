@@ -571,16 +571,17 @@
     }
 
     .ctrl-btn {
-      padding: 8px 16px;
+      padding: 9px 18px;
       border-radius: 50px;
       border: none;
       background: rgba(201, 15, 100, 0.1);
       color: #9c1450;
       font-family: 'Poppins', sans-serif;
-      font-size: 0.82rem;
+      font-size: 0.84rem;
       font-weight: 500;
       cursor: pointer;
-      transition: all 0.2s ease;
+      touch-action: manipulation;
+      transition: transform 0.12s ease, background 0.12s ease;
     }
 
     .ctrl-btn.play-main {
@@ -591,7 +592,7 @@
     }
 
     .ctrl-btn:active {
-      transform: scale(0.94);
+      transform: scale(0.93);
     }
 
     /* Modern Gallery Card */
@@ -604,7 +605,7 @@
       z-index: 16;
       width: 90%;
       max-width: 365px;
-      background: rgba(255, 255, 255, 0.9);
+      background: rgba(255, 255, 255, 0.92);
       backdrop-filter: blur(24px);
       -webkit-backdrop-filter: blur(24px);
       border: 1px solid rgba(255, 255, 255, 0.95);
@@ -619,7 +620,7 @@
 
     .photo-frame {
       width: 100%;
-      height: 255px;
+      height: 260px;
       border-radius: 20px;
       overflow: hidden;
       background: #ffeaf2;
@@ -636,7 +637,7 @@
       width: 100%;
       height: 100%;
       object-fit: cover;
-      transition: opacity 0.35s ease;
+      display: block;
     }
 
     .photo-caption {
@@ -722,8 +723,9 @@
 </head>
 <body>
 
-  <!-- Audio Element -->
+  <!-- Audio Elements: One for Music Section (5 Tracks), One Exclusively for photo37.jpg -->
   <audio id="bg-music" preload="metadata"></audio>
+  <audio id="finale-music" src="song5.mp3" preload="auto"></audio>
 
   <!-- INTRO STAGE -->
   <div id="intro-stage">
@@ -810,10 +812,10 @@
       </div>
     </div>
 
-    <!-- Modern Synced Music Player Card -->
+    <!-- Modern Synced Music Player Card (Only 5 Tracks) -->
     <div id="music-window">
       <div class="card-header">
-        <span id="track-counter">🎶 Track 1 of 6</span>
+        <span id="track-counter">🎶 Track 1 of 5</span>
         <div class="close-pill" onclick="closeMusicPlayer()">✕</div>
       </div>
       <div class="music-player-content">
@@ -1067,10 +1069,17 @@
       }, 700);
     }
 
+    function stopFinaleMusic() {
+      const finaleAudio = document.getElementById('finale-music');
+      finaleAudio.pause();
+      finaleAudio.currentTime = 0;
+    }
+
     function closeAllPopups() {
       document.getElementById('music-window').style.display = 'none';
       document.getElementById('gallery-window').style.display = 'none';
       document.getElementById('info-modal').style.display = 'none';
+      stopFinaleMusic();
     }
 
     function closeCakeWindow() {
@@ -1087,7 +1096,7 @@
       document.getElementById('cake-question').textContent = 'Take your time... the wish is all yours! 🕯️';
     }
 
-    /* Playlist & Synced Lyrics Logic (Including song5.mp3) */
+    /* Playlist & Synced Lyrics Logic (Strictly 5 Tracks in Music Section) */
     const songs = [
       {
         src: 'song.mp3',
@@ -1140,16 +1149,6 @@
           "Yes, yes, I love you",
           "It's so easy to say you and to do"
         ]
-      },
-      {
-        src: 'song5.mp3',
-        title: 'Our Special Memory Song',
-        artist: 'Forever With You 💕',
-        lyrics: [
-          "✨ Every picture tells our story...",
-          "38 moments of pure happiness with you 💖",
-          "Happy Birthday, my love 🎂"
-        ]
       }
     ];
 
@@ -1183,6 +1182,7 @@
     }
 
     function playAudio() {
+      stopFinaleMusic();
       const playPromise = audio.play();
       if (playPromise !== undefined) {
         playPromise.then(() => {
@@ -1292,7 +1292,7 @@
       document.getElementById('music-window').style.display = 'none';
     }
 
-    /* Photo Gallery Logic: photo.jpg to photo37.jpg (Total 38 photos) */
+    /* Photo Gallery Logic: Instant Switch + Preloading + Exclusive song5.mp3 on photo37.jpg */
     const captionsPool = [
       "Every moment with you is magic ✨",
       "My favorite smile in the whole world 💕",
@@ -1314,34 +1314,45 @@
 
     let currentPhotoIdx = 0;
 
+    function preloadAdjacentPhotos(idx) {
+      const nextIdx = (idx + 1) % photos.length;
+      const prevIdx = (idx - 1 + photos.length) % photos.length;
+      new Image().src = photos[nextIdx].src;
+      new Image().src = photos[prevIdx].src;
+    }
+
     function openGallery() {
       closeAllPopups();
+      pauseAudio(); // Stops any background music from Music section when entering Gallery
       document.getElementById('gallery-window').style.display = 'block';
       updatePhotoDisplay();
     }
 
     function closeGallery() {
       document.getElementById('gallery-window').style.display = 'none';
+      stopFinaleMusic(); // Stops song5.mp3 when closing Gallery
     }
 
     function updatePhotoDisplay() {
       const photo = photos[currentPhotoIdx];
       const imgEl = document.getElementById('gallery-img');
-      imgEl.style.opacity = '0';
-      setTimeout(() => {
-        imgEl.src = photo.src;
-        imgEl.style.opacity = '1';
-      }, 150);
+      
+      // Immediate update without delay
+      imgEl.src = photo.src;
       document.getElementById('photo-counter').textContent = `📷 Memory ${currentPhotoIdx + 1} of ${photos.length}`;
       document.getElementById('photo-caption').textContent = photo.caption;
 
-      // Trigger song5.mp3 automatically when photo37.jpg is displayed
+      // Preload next & previous images so clicking Next is instant
+      preloadAdjacentPhotos(currentPhotoIdx);
+
+      // Play song5.mp3 ONLY when photo37.jpg is displayed; stop it otherwise
+      const finaleAudio = document.getElementById('finale-music');
       if (photo.src === 'photo37.jpg') {
-        const song5Idx = songs.findIndex(s => s.src === 'song5.mp3');
-        if (song5Idx !== -1 && (currentSongIdx !== song5Idx || !isPlaying)) {
-          currentSongIdx = song5Idx;
-          loadSong(song5Idx, true);
-        }
+        pauseAudio();
+        finaleAudio.currentTime = 0;
+        finaleAudio.play().catch(err => console.error('Finale audio error:', err));
+      } else {
+        stopFinaleMusic();
       }
     }
 
