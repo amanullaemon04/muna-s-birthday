@@ -481,7 +481,7 @@
 
     .song-title {
       font-family: 'Playfair Display', serif;
-      font-size: 1.15rem;
+      font-size: 1.12rem;
       font-weight: 700;
       color: #801b47;
     }
@@ -759,7 +759,7 @@
     <!-- Modern Synced Music Player Card -->
     <div id="music-window">
       <div class="card-header">
-        <span id="track-counter">🎶 Track 1 of 4</span>
+        <span id="track-counter">🎶 Track 1 of 5</span>
         <div class="close-pill" onclick="closeMusicPlayer()">✕</div>
       </div>
       <div class="music-player-content">
@@ -767,8 +767,8 @@
           <div class="vinyl-center"></div>
         </div>
         <div class="song-meta">
-          <div class="song-title" id="song-title">Perfect</div>
-          <div class="song-artist" id="song-artist">Ed Sheeran</div>
+          <div class="song-title" id="song-title">There Is a Light That Never Goes Out</div>
+          <div class="song-artist" id="song-artist">The Smiths</div>
         </div>
         
         <div class="lyrics-box" id="lyrics-display"></div>
@@ -1009,17 +1009,28 @@
       document.getElementById('cake-question').textContent = 'Take your time... the wish is all yours! 🕯️';
     }
 
-    /* Playlist & Synced Lyrics Logic */
+    /* Playlist & Synced Lyrics Logic (All 5 Songs) */
     const songs = [
+      {
+        src: 'Song.mp3',
+        title: 'There Is a Light That Never Goes Out',
+        artist: 'The Smiths',
+        lyrics: [
+          "Line 1: Paste your saved lyrics line here...",
+          "Line 2: Paste your saved lyrics line here...",
+          "Line 3: Paste your saved lyrics line here...",
+          "Line 4: Paste your saved lyrics line here..."
+        ]
+      },
       {
         src: 'Song1.mp3',
         title: 'Perfect',
         artist: 'Ed Sheeran',
         lyrics: [
-          "Darling, just hold my hand, be my girl, I'll be your man",
-          "I see my future in your eyes",
-          "Baby, I'm dancin' in the dark with you between my arms",
-          "Barefoot on the grass, listenin' to our favourite song"
+          "Line 1: Paste your saved lyrics line here...",
+          "Line 2: Paste your saved lyrics line here...",
+          "Line 3: Paste your saved lyrics line here...",
+          "Line 4: Paste your saved lyrics line here..."
         ]
       },
       {
@@ -1027,10 +1038,10 @@
         title: 'Chiro Odhora',
         artist: 'Favorite Melody',
         lyrics: [
-          "তোমার চিরচেনা পথের ঐ সীমা ছাড়িয়ে",
-          "এই প্রেম বুকে ধরে আমি হয়তো যাবো হারিয়ে",
-          "চোখের গভীরে তবু মিছে ইচ্ছে জড়িয়ে",
-          "একবার শুধু একটিবার হাতটা দাও বাড়িয়ে"
+          "Line 1: Paste your saved lyrics line here...",
+          "Line 2: Paste your saved lyrics line here...",
+          "Line 3: Paste your saved lyrics line here...",
+          "Line 4: Paste your saved lyrics line here..."
         ]
       },
       {
@@ -1038,9 +1049,9 @@
         title: 'Sudhu Tomake',
         artist: 'Romantic Acoustic',
         lyrics: [
-          "তুমি আমার আলো, নিভিয়ে দাও অন্ধকার",
-          "আমি শুধু তোমাকে চাই",
-          "আজও খুঁজে বেড়াই"
+          "Line 1: Paste your saved lyrics line here...",
+          "Line 2: Paste your saved lyrics line here...",
+          "Line 3: Paste your saved lyrics line here..."
         ]
       },
       {
@@ -1048,9 +1059,9 @@
         title: 'Ja Tebia Liubliu',
         artist: 'Special Track',
         lyrics: [
-          "Reveille...",
-          "Yes, yes, I love you",
-          "It's so easy to say you and to do"
+          "Line 1: Paste your saved lyrics line here...",
+          "Line 2: Paste your saved lyrics line here...",
+          "Line 3: Paste your saved lyrics line here..."
         ]
       }
     ];
@@ -1063,6 +1074,8 @@
     function loadSong(idx, autoPlay = false) {
       const song = songs[idx];
       audio.src = song.src;
+      audio.load();
+
       document.getElementById('track-counter').textContent = `🎶 Track ${idx + 1} of ${songs.length}`;
       document.getElementById('song-title').textContent = song.title;
       document.getElementById('song-artist').textContent = song.artist;
@@ -1083,13 +1096,18 @@
     }
 
     function playAudio() {
-      audio.play().then(() => {
-        isPlaying = true;
-        document.getElementById('vinyl').classList.add('playing');
-        document.getElementById('play-btn').textContent = 'Pause ⏸';
-      }).catch(() => {
-        isPlaying = false;
-      });
+      const playPromise = audio.play();
+      if (playPromise !== undefined) {
+        playPromise.then(() => {
+          isPlaying = true;
+          document.getElementById('vinyl').classList.add('playing');
+          document.getElementById('play-btn').textContent = 'Pause ⏸';
+        }).catch((err) => {
+          isPlaying = false;
+          document.getElementById('play-btn').textContent = 'Play ▶';
+          console.error('Playback error:', err);
+        });
+      }
     }
 
     function pauseAudio() {
@@ -1100,7 +1118,7 @@
     }
 
     function togglePlayMusic() {
-      if (!audio.src) {
+      if (!audio.getAttribute('src')) {
         loadSong(currentSongIdx, true);
         return;
       }
@@ -1128,7 +1146,11 @@
       return `${m}:${s < 10 ? '0' : ''}${s}`;
     }
 
-    /* Real-time Audio & Lyrics Sync */
+    audio.addEventListener('error', () => {
+      document.getElementById('song-artist').textContent = `⚠️ File missing: ${songs[currentSongIdx].src}`;
+      pauseAudio();
+    });
+
     audio.addEventListener('loadedmetadata', () => {
       document.getElementById('total-duration').textContent = formatTime(audio.duration);
     });
@@ -1173,7 +1195,7 @@
 
     function openMusicPlayer() {
       document.getElementById('music-window').style.display = 'block';
-      if (!audio.src) {
+      if (!audio.getAttribute('src')) {
         loadSong(currentSongIdx, false);
       }
     }
