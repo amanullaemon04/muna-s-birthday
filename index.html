@@ -285,7 +285,7 @@
       50% { box-shadow: 0 8px 28px rgba(255, 42, 109, 0.7); }
     }
 
-    /* SCENE 4: MODERN CELEBRATION HUB (Replaced Old Windows Style) */
+    /* SCENE 4: MODERN CELEBRATION HUB */
     #modern-hub {
       position: fixed;
       inset: 0;
@@ -424,36 +424,36 @@
     #music-window {
       display: none;
       position: absolute;
-      top: 50%;
+      top: 47%;
       left: 50%;
-      transform: translate(-50%, -55%);
+      transform: translate(-50%, -50%);
       z-index: 15;
-      width: 88%;
-      max-width: 350px;
-      background: rgba(255, 255, 255, 0.82);
-      backdrop-filter: blur(22px);
-      -webkit-backdrop-filter: blur(22px);
-      border: 1px solid rgba(255, 255, 255, 0.9);
+      width: 90%;
+      max-width: 365px;
+      background: rgba(255, 255, 255, 0.88);
+      backdrop-filter: blur(24px);
+      -webkit-backdrop-filter: blur(24px);
+      border: 1px solid rgba(255, 255, 255, 0.95);
       border-radius: 28px;
-      box-shadow: 0 24px 50px rgba(150, 30, 80, 0.18);
+      box-shadow: 0 24px 55px rgba(150, 30, 80, 0.22);
     }
 
     .music-player-content {
-      padding: 10px 22px 24px;
+      padding: 6px 20px 22px;
       text-align: center;
     }
 
     .vinyl-record {
-      width: 84px;
-      height: 84px;
+      width: 72px;
+      height: 72px;
       background: radial-gradient(circle, #3a222d 0%, #180c12 100%);
       border-radius: 50%;
-      margin: 0 auto 14px;
+      margin: 0 auto 10px;
       display: flex;
       align-items: center;
       justify-content: center;
       box-shadow: 0 8px 20px rgba(0, 0, 0, 0.18);
-      border: 3px solid rgba(255, 255, 255, 0.7);
+      border: 3px solid rgba(255, 255, 255, 0.8);
       animation: spinVinyl 5s linear infinite;
       animation-play-state: paused;
     }
@@ -463,8 +463,8 @@
     }
 
     .vinyl-center {
-      width: 24px;
-      height: 24px;
+      width: 22px;
+      height: 22px;
       background: linear-gradient(135deg, #ff7aa8, #c90f64);
       border-radius: 50%;
       border: 2px solid #fff;
@@ -475,18 +475,92 @@
       100% { transform: rotate(360deg); }
     }
 
+    .song-meta {
+      margin-bottom: 10px;
+    }
+
+    .song-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: #801b47;
+    }
+
+    .song-artist {
+      font-size: 0.78rem;
+      color: #9c5b75;
+      font-weight: 500;
+    }
+
+    /* Synced Lyrics Box */
     .lyrics-box {
-      background: rgba(255, 245, 249, 0.75);
-      border: 1px solid rgba(201, 15, 100, 0.12);
-      border-radius: 16px;
-      height: 95px;
+      background: linear-gradient(180deg, rgba(255, 240, 246, 0.85), rgba(255, 250, 252, 0.95));
+      border: 1px solid rgba(201, 15, 100, 0.14);
+      border-radius: 18px;
+      height: 132px;
       overflow-y: auto;
-      padding: 12px;
-      font-size: 0.88rem;
-      color: #5c3344;
-      margin-bottom: 16px;
+      padding: 16px 12px;
+      margin-bottom: 12px;
       text-align: center;
-      line-height: 1.5;
+      scroll-behavior: smooth;
+      box-shadow: inset 0 2px 8px rgba(201, 15, 100, 0.05);
+    }
+
+    .lyrics-box::-webkit-scrollbar {
+      width: 4px;
+    }
+
+    .lyrics-box::-webkit-scrollbar-thumb {
+      background: rgba(201, 15, 100, 0.25);
+      border-radius: 10px;
+    }
+
+    .lyric-line {
+      font-size: 0.88rem;
+      color: #9e7586;
+      padding: 5px 6px;
+      line-height: 1.45;
+      transition: all 0.35s ease;
+      border-radius: 8px;
+    }
+
+    .lyric-line.active {
+      color: #c90f64;
+      font-weight: 600;
+      font-size: 0.96rem;
+      background: rgba(255, 77, 121, 0.08);
+      transform: scale(1.03);
+    }
+
+    /* Progress Bar */
+    .progress-area {
+      margin-bottom: 14px;
+    }
+
+    .progress-bar-bg {
+      width: 100%;
+      height: 5px;
+      background: rgba(201, 15, 100, 0.15);
+      border-radius: 10px;
+      cursor: pointer;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .progress-bar-fill {
+      width: 0%;
+      height: 100%;
+      background: linear-gradient(90deg, #ff4d79, #c90f64);
+      border-radius: 10px;
+      transition: width 0.15s linear;
+    }
+
+    .time-row {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.7rem;
+      color: #8a566b;
+      margin-top: 4px;
     }
 
     .player-controls {
@@ -512,7 +586,7 @@
     .ctrl-btn.play-main {
       background: linear-gradient(135deg, #ff4d79, #c90f64);
       color: #fff;
-      padding: 10px 22px;
+      padding: 10px 24px;
       box-shadow: 0 5px 15px rgba(201, 15, 100, 0.25);
     }
 
@@ -572,7 +646,7 @@
       color: #6d3b50;
     }
 
-    /* Info Modal for Letter / Traits / Gallery */
+    /* Info Modal */
     #info-modal {
       display: none;
       position: absolute;
@@ -595,7 +669,7 @@
 <body>
 
   <!-- Audio Element -->
-  <audio id="bg-music" loop></audio>
+  <audio id="bg-music" preload="metadata"></audio>
 
   <!-- INTRO STAGE -->
   <div id="intro-stage">
@@ -682,19 +756,33 @@
       </div>
     </div>
 
-    <!-- Modern Music Player Card -->
+    <!-- Modern Synced Music Player Card -->
     <div id="music-window">
       <div class="card-header">
-        <span>🎶 Love Playlist</span>
+        <span id="track-counter">🎶 Track 1 of 4</span>
         <div class="close-pill" onclick="closeMusicPlayer()">✕</div>
       </div>
       <div class="music-player-content">
         <div class="vinyl-record" id="vinyl">
           <div class="vinyl-center"></div>
         </div>
-        <div class="lyrics-box" id="lyrics-display">
-          🎵 Select a song and press Play...
+        <div class="song-meta">
+          <div class="song-title" id="song-title">Perfect</div>
+          <div class="song-artist" id="song-artist">Ed Sheeran</div>
         </div>
+        
+        <div class="lyrics-box" id="lyrics-display"></div>
+
+        <div class="progress-area">
+          <div class="progress-bar-bg" id="progress-container" onclick="seekAudio(event)">
+            <div class="progress-bar-fill" id="progress-fill"></div>
+          </div>
+          <div class="time-row">
+            <span id="current-time">0:00</span>
+            <span id="total-duration">0:00</span>
+          </div>
+        </div>
+
         <div class="player-controls">
           <button class="ctrl-btn" onclick="prevSong()">⏮ Prev</button>
           <button class="ctrl-btn play-main" onclick="togglePlayMusic()" id="play-btn">Play ▶</button>
@@ -921,51 +1009,177 @@
       document.getElementById('cake-question').textContent = 'Take your time... the wish is all yours! 🕯️';
     }
 
-    /* Music Player Logic */
+    /* Playlist & Synced Lyrics Logic */
     const songs = [
-      { title: 'Song 1: Perfect Melody 💕', lyrics: 'You are the best thing that ever happened to me... Happy Birthday, my love! 🎶' },
-      { title: 'Song 2: Starlight Serenade ✨', lyrics: 'Every day with you feels like a celebration under the stars... 🌟' },
-      { title: 'Song 3: Forever & Always 💖', lyrics: 'Here is to many more birthdays together, hand in hand... 🥂' }
+      {
+        src: 'Song1.mp3',
+        title: 'Perfect',
+        artist: 'Ed Sheeran',
+        lyrics: [
+          "Darling, just hold my hand, be my girl, I'll be your man",
+          "I see my future in your eyes",
+          "Baby, I'm dancin' in the dark with you between my arms",
+          "Barefoot on the grass, listenin' to our favourite song"
+        ]
+      },
+      {
+        src: 'song2.mp3',
+        title: 'Chiro Odhora',
+        artist: 'Favorite Melody',
+        lyrics: [
+          "তোমার চিরচেনা পথের ঐ সীমা ছাড়িয়ে",
+          "এই প্রেম বুকে ধরে আমি হয়তো যাবো হারিয়ে",
+          "চোখের গভীরে তবু মিছে ইচ্ছে জড়িয়ে",
+          "একবার শুধু একটিবার হাতটা দাও বাড়িয়ে"
+        ]
+      },
+      {
+        src: 'song3.mp3',
+        title: 'Sudhu Tomake',
+        artist: 'Romantic Acoustic',
+        lyrics: [
+          "তুমি আমার আলো, নিভিয়ে দাও অন্ধকার",
+          "আমি শুধু তোমাকে চাই",
+          "আজও খুঁজে বেড়াই"
+        ]
+      },
+      {
+        src: 'song4.mp3',
+        title: 'Ja Tebia Liubliu',
+        artist: 'Special Track',
+        lyrics: [
+          "Reveille...",
+          "Yes, yes, I love you",
+          "It's so easy to say you and to do"
+        ]
+      }
     ];
+
+    const audio = document.getElementById('bg-music');
     let currentSongIdx = 0;
     let isPlaying = false;
+    let activeLineIdx = -1;
 
-    function openMusicPlayer() {
-      document.getElementById('music-window').style.display = 'block';
-      updateSongDisplay();
+    function loadSong(idx, autoPlay = false) {
+      const song = songs[idx];
+      audio.src = song.src;
+      document.getElementById('track-counter').textContent = `🎶 Track ${idx + 1} of ${songs.length}`;
+      document.getElementById('song-title').textContent = song.title;
+      document.getElementById('song-artist').textContent = song.artist;
+      document.getElementById('progress-fill').style.width = '0%';
+      document.getElementById('current-time').textContent = '0:00';
+      document.getElementById('total-duration').textContent = '0:00';
+      activeLineIdx = -1;
+
+      const lyricsBox = document.getElementById('lyrics-display');
+      lyricsBox.innerHTML = song.lyrics
+        .map((line, i) => `<div class="lyric-line" id="lyric-${i}">${line}</div>`)
+        .join('');
+      lyricsBox.scrollTop = 0;
+
+      if (autoPlay) {
+        playAudio();
+      }
     }
 
-    function closeMusicPlayer() {
-      document.getElementById('music-window').style.display = 'none';
+    function playAudio() {
+      audio.play().then(() => {
+        isPlaying = true;
+        document.getElementById('vinyl').classList.add('playing');
+        document.getElementById('play-btn').textContent = 'Pause ⏸';
+      }).catch(() => {
+        isPlaying = false;
+      });
     }
 
-    function updateSongDisplay() {
-      const song = songs[currentSongIdx];
-      document.getElementById('lyrics-display').innerHTML = `<strong>${song.title}</strong><br><br>${song.lyrics}`;
+    function pauseAudio() {
+      audio.pause();
+      isPlaying = false;
+      document.getElementById('vinyl').classList.remove('playing');
+      document.getElementById('play-btn').textContent = 'Play ▶';
     }
 
     function togglePlayMusic() {
-      isPlaying = !isPlaying;
-      const vinyl = document.getElementById('vinyl');
-      const btn = document.getElementById('play-btn');
-      if (isPlaying) {
-        vinyl.classList.add('playing');
-        btn.textContent = 'Pause ⏸';
-      } else {
-        vinyl.classList.remove('playing');
-        btn.textContent = 'Play ▶';
+      if (!audio.src) {
+        loadSong(currentSongIdx, true);
+        return;
       }
-      updateSongDisplay();
+      if (isPlaying) {
+        pauseAudio();
+      } else {
+        playAudio();
+      }
     }
 
     function nextSong() {
       currentSongIdx = (currentSongIdx + 1) % songs.length;
-      updateSongDisplay();
+      loadSong(currentSongIdx, true);
     }
 
     function prevSong() {
       currentSongIdx = (currentSongIdx - 1 + songs.length) % songs.length;
-      updateSongDisplay();
+      loadSong(currentSongIdx, true);
+    }
+
+    function formatTime(sec) {
+      if (isNaN(sec) || !isFinite(sec)) return '0:00';
+      const m = Math.floor(sec / 60);
+      const s = Math.floor(sec % 60);
+      return `${m}:${s < 10 ? '0' : ''}${s}`;
+    }
+
+    /* Real-time Audio & Lyrics Sync */
+    audio.addEventListener('loadedmetadata', () => {
+      document.getElementById('total-duration').textContent = formatTime(audio.duration);
+    });
+
+    audio.addEventListener('timeupdate', () => {
+      if (!audio.duration) return;
+      const progress = (audio.currentTime / audio.duration) * 100;
+      document.getElementById('progress-fill').style.width = `${progress}%`;
+      document.getElementById('current-time').textContent = formatTime(audio.currentTime);
+
+      const totalLines = songs[currentSongIdx].lyrics.length;
+      const newLineIdx = Math.min(
+        totalLines - 1,
+        Math.floor((audio.currentTime / audio.duration) * totalLines)
+      );
+
+      if (newLineIdx !== activeLineIdx) {
+        if (activeLineIdx >= 0) {
+          const prevEl = document.getElementById(`lyric-${activeLineIdx}`);
+          if (prevEl) prevEl.classList.remove('active');
+        }
+        const currEl = document.getElementById(`lyric-${newLineIdx}`);
+        if (currEl) {
+          currEl.classList.add('active');
+          currEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
+        activeLineIdx = newLineIdx;
+      }
+    });
+
+    audio.addEventListener('ended', () => {
+      nextSong();
+    });
+
+    function seekAudio(e) {
+      if (!audio.duration) return;
+      const rect = document.getElementById('progress-container').getBoundingClientRect();
+      const clickX = e.clientX - rect.left;
+      const ratio = Math.max(0, Math.min(1, clickX / rect.width));
+      audio.currentTime = ratio * audio.duration;
+    }
+
+    function openMusicPlayer() {
+      document.getElementById('music-window').style.display = 'block';
+      if (!audio.src) {
+        loadSong(currentSongIdx, false);
+      }
+    }
+
+    function closeMusicPlayer() {
+      document.getElementById('music-window').style.display = 'none';
     }
 
     /* Modern Modal for Dock Icons */
