@@ -723,9 +723,9 @@
 </head>
 <body>
 
-  <!-- Audio Elements: One for Music Section (5 Tracks), One Exclusively for photo37.jpg -->
+  <!-- Audio Elements -->
   <audio id="bg-music" preload="metadata"></audio>
-  <audio id="finale-music" src="song5.mp3" preload="auto"></audio>
+  <audio id="gallery-special-music" preload="auto"></audio>
 
   <!-- INTRO STAGE -->
   <div id="intro-stage">
@@ -812,7 +812,7 @@
       </div>
     </div>
 
-    <!-- Modern Synced Music Player Card (Only 5 Tracks) -->
+    <!-- Modern Synced Music Player Card (5 Tracks) -->
     <div id="music-window">
       <div class="card-header">
         <span id="track-counter">🎶 Track 1 of 5</span>
@@ -1069,17 +1069,19 @@
       }, 700);
     }
 
-    function stopFinaleMusic() {
-      const finaleAudio = document.getElementById('finale-music');
-      finaleAudio.pause();
-      finaleAudio.currentTime = 0;
+    let currentGalleryAudioSrc = '';
+    function stopGallerySpecialMusic() {
+      const gAudio = document.getElementById('gallery-special-music');
+      gAudio.pause();
+      gAudio.currentTime = 0;
+      currentGalleryAudioSrc = '';
     }
 
     function closeAllPopups() {
       document.getElementById('music-window').style.display = 'none';
       document.getElementById('gallery-window').style.display = 'none';
       document.getElementById('info-modal').style.display = 'none';
-      stopFinaleMusic();
+      stopGallerySpecialMusic();
     }
 
     function closeCakeWindow() {
@@ -1096,7 +1098,7 @@
       document.getElementById('cake-question').textContent = 'Take your time... the wish is all yours! 🕯️';
     }
 
-    /* Playlist & Synced Lyrics Logic (Strictly 5 Tracks in Music Section) */
+    /* Playlist & Synced Lyrics Logic (5 Tracks in Music Section) */
     const songs = [
       {
         src: 'song.mp3',
@@ -1182,7 +1184,7 @@
     }
 
     function playAudio() {
-      stopFinaleMusic();
+      stopGallerySpecialMusic();
       const playPromise = audio.play();
       if (playPromise !== undefined) {
         playPromise.then(() => {
@@ -1292,7 +1294,7 @@
       document.getElementById('music-window').style.display = 'none';
     }
 
-    /* Photo Gallery Logic: Instant Switch + Preloading + Exclusive song5.mp3 on photo37.jpg */
+    /* Photo Gallery Logic: Memory 24 & 25 play song1.mp3, Memory 38 plays song5.mp3 */
     const captionsPool = [
       "Every moment with you is magic ✨",
       "My favorite smile in the whole world 💕",
@@ -1323,36 +1325,50 @@
 
     function openGallery() {
       closeAllPopups();
-      pauseAudio(); // Stops any background music from Music section when entering Gallery
+      pauseAudio();
       document.getElementById('gallery-window').style.display = 'block';
       updatePhotoDisplay();
     }
 
     function closeGallery() {
       document.getElementById('gallery-window').style.display = 'none';
-      stopFinaleMusic(); // Stops song5.mp3 when closing Gallery
+      stopGallerySpecialMusic();
+    }
+
+    function playGallerySpecialTrack(trackFile) {
+      const gAudio = document.getElementById('gallery-special-music');
+      // If the exact same track is already playing (e.g. moving from Memory 24 to Memory 25), keep it playing smoothly
+      if (currentGalleryAudioSrc === trackFile && !gAudio.paused) {
+        return;
+      }
+      currentGalleryAudioSrc = trackFile;
+      gAudio.src = trackFile;
+      gAudio.currentTime = 0;
+      gAudio.play().catch(err => console.error('Gallery audio error:', err));
     }
 
     function updatePhotoDisplay() {
       const photo = photos[currentPhotoIdx];
       const imgEl = document.getElementById('gallery-img');
       
-      // Immediate update without delay
       imgEl.src = photo.src;
       document.getElementById('photo-counter').textContent = `📷 Memory ${currentPhotoIdx + 1} of ${photos.length}`;
       document.getElementById('photo-caption').textContent = photo.caption;
 
-      // Preload next & previous images so clicking Next is instant
       preloadAdjacentPhotos(currentPhotoIdx);
+      pauseAudio();
 
-      // Play song5.mp3 ONLY when photo37.jpg is displayed; stop it otherwise
-      const finaleAudio = document.getElementById('finale-music');
-      if (photo.src === 'photo37.jpg') {
-        pauseAudio();
-        finaleAudio.currentTime = 0;
-        finaleAudio.play().catch(err => console.error('Finale audio error:', err));
-      } else {
-        stopFinaleMusic();
+      // Memory 24 (photo23.jpg) & Memory 25 (photo24.jpg) -> play song1.mp3
+      if (photo.src === 'photo23.jpg' || photo.src === 'photo24.jpg') {
+        playGallerySpecialTrack('song1.mp3');
+      } 
+      // Memory 38 (photo37.jpg) -> play song5.mp3
+      else if (photo.src === 'photo37.jpg') {
+        playGallerySpecialTrack('song5.mp3');
+      } 
+      // All other photos -> silence
+      else {
+        stopGallerySpecialMusic();
       }
     }
 
@@ -1380,3 +1396,4 @@
   </script>
 </body>
 </html>
+
