@@ -594,6 +594,60 @@
       transform: scale(0.94);
     }
 
+    /* Modern Gallery Card */
+    #gallery-window {
+      display: none;
+      position: absolute;
+      top: 47%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      z-index: 16;
+      width: 90%;
+      max-width: 365px;
+      background: rgba(255, 255, 255, 0.9);
+      backdrop-filter: blur(24px);
+      -webkit-backdrop-filter: blur(24px);
+      border: 1px solid rgba(255, 255, 255, 0.95);
+      border-radius: 28px;
+      box-shadow: 0 24px 55px rgba(150, 30, 80, 0.22);
+    }
+
+    .gallery-content {
+      padding: 6px 20px 22px;
+      text-align: center;
+    }
+
+    .photo-frame {
+      width: 100%;
+      height: 255px;
+      border-radius: 20px;
+      overflow: hidden;
+      background: #ffeaf2;
+      border: 3px solid #fff;
+      box-shadow: 0 8px 22px rgba(180, 50, 100, 0.14);
+      margin-bottom: 12px;
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .photo-frame img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: opacity 0.35s ease;
+    }
+
+    .photo-caption {
+      font-family: 'Playfair Display', serif;
+      font-style: italic;
+      font-size: 0.98rem;
+      color: #801b47;
+      margin-bottom: 14px;
+      min-height: 24px;
+    }
+
     /* Modern Floating Dock */
     .modern-dock {
       position: relative;
@@ -759,7 +813,7 @@
     <!-- Modern Synced Music Player Card -->
     <div id="music-window">
       <div class="card-header">
-        <span id="track-counter">🎶 Track 1 of 5</span>
+        <span id="track-counter">🎶 Track 1 of 6</span>
         <div class="close-pill" onclick="closeMusicPlayer()">✕</div>
       </div>
       <div class="music-player-content">
@@ -791,6 +845,24 @@
       </div>
     </div>
 
+    <!-- Modern Photo Gallery Card -->
+    <div id="gallery-window">
+      <div class="card-header">
+        <span id="photo-counter">📷 Memory 1 of 38</span>
+        <div class="close-pill" onclick="closeGallery()">✕</div>
+      </div>
+      <div class="gallery-content">
+        <div class="photo-frame">
+          <img id="gallery-img" src="photo.jpg" alt="Our Memory">
+        </div>
+        <div class="photo-caption" id="photo-caption">Every moment with you is magic ✨</div>
+        <div class="player-controls">
+          <button class="ctrl-btn" onclick="prevPhoto()">⏮ Prev</button>
+          <button class="ctrl-btn play-main" onclick="nextPhoto()">Next ⏭</button>
+        </div>
+      </div>
+    </div>
+
     <!-- Modern Info Popup Card -->
     <div id="info-modal">
       <div class="card-header" style="padding: 0 0 10px;">
@@ -807,7 +879,7 @@
         <div class="icon-box">💿</div>
         <div class="icon-label">Music</div>
       </div>
-      <div class="dock-item" onclick="openInfoModal('📷 Our Memories', 'Every moment with you is my favorite memory. More adventures coming soon! 💕')">
+      <div class="dock-item" onclick="openGallery()">
         <div class="icon-box">📷</div>
         <div class="icon-label">Gallery</div>
       </div>
@@ -995,6 +1067,12 @@
       }, 700);
     }
 
+    function closeAllPopups() {
+      document.getElementById('music-window').style.display = 'none';
+      document.getElementById('gallery-window').style.display = 'none';
+      document.getElementById('info-modal').style.display = 'none';
+    }
+
     function closeCakeWindow() {
       document.getElementById('cake-window').style.display = 'none';
     }
@@ -1009,16 +1087,16 @@
       document.getElementById('cake-question').textContent = 'Take your time... the wish is all yours! 🕯️';
     }
 
-    /* Playlist & Synced Lyrics Logic (All 5 Lowercase Files) */
+    /* Playlist & Synced Lyrics Logic (Including song5.mp3) */
     const songs = [
       {
         src: 'song.mp3',
         title: 'There Is a Light That Never Goes Out',
         artist: 'The Smiths',
         lyrics: [
-          "🎶 And if a double-decker bus crashes into us",
-          "To die by your side",
-          "Is such a heavenly way to die✨"
+          "🎶 A light that never goes out...",
+          "Every moment with you shines bright 💕",
+          "Happy Birthday, my love ✨"
         ]
       },
       {
@@ -1061,6 +1139,16 @@
           "reveille",
           "Yes, yes, I love you",
           "It's so easy to say you and to do"
+        ]
+      },
+      {
+        src: 'song5.mp3',
+        title: 'Our Special Memory Song',
+        artist: 'Forever With You 💕',
+        lyrics: [
+          "✨ Every picture tells our story...",
+          "38 moments of pure happiness with you 💖",
+          "Happy Birthday, my love 🎂"
         ]
       }
     ];
@@ -1193,6 +1281,7 @@
     }
 
     function openMusicPlayer() {
+      closeAllPopups();
       document.getElementById('music-window').style.display = 'block';
       if (!audio.getAttribute('src')) {
         loadSong(currentSongIdx, false);
@@ -1203,8 +1292,72 @@
       document.getElementById('music-window').style.display = 'none';
     }
 
+    /* Photo Gallery Logic: photo.jpg to photo37.jpg (Total 38 photos) */
+    const captionsPool = [
+      "Every moment with you is magic ✨",
+      "My favorite smile in the whole world 💕",
+      "Together is my favorite place to be 🌸",
+      "You make ordinary days feel extraordinary 🌟",
+      "Forever grateful for your love 💖",
+      "Here is to many more memories with you 🥂"
+    ];
+
+    const photos = [{ src: 'photo.jpg', caption: captionsPool[0] }];
+    for (let i = 1; i <= 37; i++) {
+      photos.push({
+        src: `photo${i}.jpg`,
+        caption: i === 37 
+          ? "Our special finale memory — Happy Birthday, My Love! 🎂💕" 
+          : captionsPool[i % captionsPool.length]
+      });
+    }
+
+    let currentPhotoIdx = 0;
+
+    function openGallery() {
+      closeAllPopups();
+      document.getElementById('gallery-window').style.display = 'block';
+      updatePhotoDisplay();
+    }
+
+    function closeGallery() {
+      document.getElementById('gallery-window').style.display = 'none';
+    }
+
+    function updatePhotoDisplay() {
+      const photo = photos[currentPhotoIdx];
+      const imgEl = document.getElementById('gallery-img');
+      imgEl.style.opacity = '0';
+      setTimeout(() => {
+        imgEl.src = photo.src;
+        imgEl.style.opacity = '1';
+      }, 150);
+      document.getElementById('photo-counter').textContent = `📷 Memory ${currentPhotoIdx + 1} of ${photos.length}`;
+      document.getElementById('photo-caption').textContent = photo.caption;
+
+      // Trigger song5.mp3 automatically when photo37.jpg is displayed
+      if (photo.src === 'photo37.jpg') {
+        const song5Idx = songs.findIndex(s => s.src === 'song5.mp3');
+        if (song5Idx !== -1 && (currentSongIdx !== song5Idx || !isPlaying)) {
+          currentSongIdx = song5Idx;
+          loadSong(song5Idx, true);
+        }
+      }
+    }
+
+    function nextPhoto() {
+      currentPhotoIdx = (currentPhotoIdx + 1) % photos.length;
+      updatePhotoDisplay();
+    }
+
+    function prevPhoto() {
+      currentPhotoIdx = (currentPhotoIdx - 1 + photos.length) % photos.length;
+      updatePhotoDisplay();
+    }
+
     /* Modern Modal for Dock Icons */
     function openInfoModal(title, text) {
+      closeAllPopups();
       document.getElementById('modal-title').textContent = title;
       document.getElementById('modal-text').textContent = text;
       document.getElementById('info-modal').style.display = 'block';
